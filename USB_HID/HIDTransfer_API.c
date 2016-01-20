@@ -41,7 +41,7 @@
 #define HID_CMD_WRITE    0xC3
 #define HID_CMD_TEST     0xB4
 
-#define HID_CMD_MN913A_SETTING 0x86
+//#define HID_CMD_MN913A_SETTING 0x86
 #define PAGE_SIZE		 256
 
 typedef __packed struct {
@@ -55,7 +55,7 @@ typedef __packed struct {
 
 CMD_T gCmd;    
 
-
+uint8_t recv_cmd = HID_CMD_NONE;
 uint8_t g_au8DeviceReport[HID_MAX_PACKET_SIZE_INT_IN];
 const uint32_t g_u32DeviceReportSize = sizeof(g_au8DeviceReport) / sizeof(g_au8DeviceReport[0]);
 
@@ -412,7 +412,10 @@ printf("\n");
 		}
 		case HID_CMD_MN913A_SETTING:  //OUT
 			Recv_MN913A_Preference(&gCmd);
-      break;
+            break;
+		case HID_CMD_MN913A_MEASURE:
+		    recv_cmd = HID_CMD_MN913A_MEASURE;
+		    break;
 		default:
 			return -1;
 	}	
@@ -491,6 +494,7 @@ void HID_SetOutReport(uint8_t *pu8EpBuf, uint32_t u32Size)
 					u8Cmd = HID_CMD_NONE;	
 
 					DBG_PRINTF("Setup preference command complete.\n");
+					recv_cmd = HID_CMD_MN913A_SETTING;
 				}
 				g_u32BytesInPageBuf = 0;
 			}

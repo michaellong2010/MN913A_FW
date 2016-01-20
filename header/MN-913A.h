@@ -10,6 +10,7 @@
 #include "DrvGPIO.h"
 #include "DrvSPI.h"
 #include "DrvPWM.h"
+#include "DrvI2C.h"
 #include "measurement.h"
 
 #define USE_USB 1
@@ -52,8 +53,21 @@ void EINT0Callback(void);
 struct MN913A_setting_type {
 	int Xenon_Voltage_Level;
 };
+
+extern uint8_t recv_cmd;
 extern  struct MN913A_setting_type mn913a_preference;
+
+#define HID_CMD_MN913A_SETTING 0x86
+#define HID_CMD_MN913A_MEASURE 0x87
 
 #define MAX_XENON_LEVEL 255
 #define MIN_XENON_LEVEL 0
+
+/* I2C variable resistor device */
+#define AD5259_I2C_Slave_Addr 0x18
+#define AD5259_Word_Addr_RDAC 0x00
+#define AD5259_Word_Addr_EEPROM 0x01
+#define AD5259_Word_Addr_WP 0x02
+#define AD5259_Word_Addr_Sync_EEPROM_RDAC 0x05
+#define AD5259_Word_Addr_Sync_RDAC_EEPROM 0x06
 #endif

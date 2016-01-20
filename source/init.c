@@ -143,6 +143,23 @@ void Init_Interface_IO(void)
   DrvGPIO_ClrBit(GPB, 10);
   //DrvGPIO_ClrBit(GPB, 3);
   DrvGPIO_Open(GPB, 11, IO_INPUT); //Xenon PWM
+
+
+
+  DrvGPIO_InitFunction(FUNC_I2C0);  //I2C for accessing external RTC
+  UNLOCKREG();
+  u32HCLK = DrvSYS_GetHCLK() * 1000;
+  DrvI2C_Open(I2C_PORT0, u32HCLK, 200000);
+  /* Get I2C0 clock */
+  u32data = DrvI2C_GetClock(I2C_PORT0, u32HCLK);
+#ifdef SYS_DEBUG
+  printf("I2C0 clock %d Hz\n", u32data);
+#endif
+  /* Enable I2C0 interrupt and set corresponding NVIC bit */
+  DrvI2C_EnableInt(I2C_PORT0);
+  DrvI2C_EnableTimeoutCount(I2C_PORT0, 0, 0);  //starting time-out
+  //DrvI2C_InstallCallback(I2C_PORT0, TIMEOUT, I2C0_Timeout);
+  LOCKREG();
 }
 
 void DDC114_Init(void) {

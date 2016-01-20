@@ -166,8 +166,26 @@ void main ( void )
   
   /*20160111 added by michael*/
   while ( 1 ) {
-    getchar ();
-	MaestroNano_Measure ( );
+    //getchar ();
+	if ( recv_cmd == HID_CMD_MN913A_SETTING ) {
+	    printf ( "AD5259 write RDAC/EEPROM: %d\n", mn913a_preference.Xenon_Voltage_Level );
+		Set_AD5259_Potential ( AD5259_Word_Addr_RDAC, mn913a_preference.Xenon_Voltage_Level );
+		SysTimerDelay( 10 );
+		Set_AD5259_Potential ( AD5259_Word_Addr_EEPROM, mn913a_preference.Xenon_Voltage_Level );
+		SysTimerDelay( 10 );
+		recv_cmd = 0;
+
+		if ( !Get_AD5259_Potential ( AD5259_Word_Addr_RDAC, &mn913a_preference.Xenon_Voltage_Level ) )
+			printf ( "AD5259 read RDAC: %d\n", mn913a_preference.Xenon_Voltage_Level );
+		if ( !Get_AD5259_Potential ( AD5259_Word_Addr_EEPROM, &mn913a_preference.Xenon_Voltage_Level ) )
+			printf ( "AD5259 read EEPROM: %d\n", mn913a_preference.Xenon_Voltage_Level );
+	}
+	else
+		if ( recv_cmd == HID_CMD_MN913A_MEASURE ) {
+			MaestroNano_Measure ( );		
+			recv_cmd = 0;
+		}
+	//MaestroNano_Measure ( );
     SysTimerDelay ( 10 );
   }
 }
