@@ -1,0 +1,5 @@
+.svn/
+lst/
+obj/
+*.bak
+*.sfb

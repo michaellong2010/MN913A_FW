@@ -1,0 +1,2 @@
+Dependencies for Project 'maestronano', Target 'Target 1': (DO NOT MODIFY !)
+F (.\startup_NUC1xx.s)(0x50C6DF8E)(--device DARMCM1 -g --apcs=interwork -I "D:\Keil\ARM\INC\Nuvoton" --list "startup_NUC1xx.lst" --xref -o "startup_NUC1xx.o")

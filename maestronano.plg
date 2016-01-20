@@ -1,0 +1,1419 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\NUC100SeriesBSP_v1.05.001\NUC100SeriesBSP\NuvotonPlatform_Keil\Sample\My work\MN-913A\maestronano.uvproj
+Project File Date:  01/04/2016
+
+<h2>Output:</h2>
+Build target 'MN-913A'
+assembling startup_NUC1xx.s...
+compiling core_cm0.c...
+compiling system_NUC1xx.c...
+..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx\NUC1xx.h(76): error:  #5: cannot open source input file "System\SysInfra.h": No such file or directory
+compiling retarget.c...
+..\..\..\Src\Driver\retarget.c(7): error:  #5: cannot open source input file "NUC1xx.h": No such file or directory
+compiling main.c...
+source\main.c(3): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(6): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'MN-913A'
+assembling startup_NUC1xx.s...
+creating preprocessor file for core_cm0.c...
+compiling core_cm0.c...
+creating preprocessor file for system_NUC1xx.c...
+compiling system_NUC1xx.c...
+creating preprocessor file for retarget.c...
+compiling retarget.c...
+creating preprocessor file for main.c...
+source\main.c(6): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+source\main.c(3): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(6): warning:  #1-D: last line of file ends without a newline
+linking...
+maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=352 RO-data=208 RW-data=0 ZI-data=1120  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+".\obj\maestronano.axf": Error: Q0122E: Could not open file '.\obj\maestronano.axf': No such file or directory
+Finished: 0 information, 0 warning and 1 error messages.
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf": Error: Q0122E: Could not open file '.\obj\maestronano.axf': No such file or directory
+Finished: 0 information, 0 warning and 1 error messages.
+"maestronano.axf" - 0 Error(s), 3 Warning(s).
+Build target 'MN-913A'
+assembling startup_NUC1xx.s...
+creating preprocessor file for core_cm0.c...
+compiling core_cm0.c...
+creating preprocessor file for system_NUC1xx.c...
+compiling system_NUC1xx.c...
+creating preprocessor file for retarget.c...
+compiling retarget.c...
+creating preprocessor file for main.c...
+source\main.c(6): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+source\main.c(3): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(6): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=352 RO-data=208 RW-data=0 ZI-data=1120  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 3 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for DrvUSB.c...
+compiling DrvUSB.c...
+..\..\..\Src\Driver\DrvUSB.c(695): warning:  #223-D: function "printf" declared implicitly
+..\..\..\Src\Driver\DrvUSB.c(697): warning:  #223-D: function "printf" declared implicitly
+..\..\..\Src\Driver\DrvUSB.c(673): warning:  #550-D: variable "buf2" was set but never used
+..\..\..\Src\Driver\DrvUSB.c(1861): warning:  #223-D: function "printf" declared implicitly
+..\..\..\Src\Driver\DrvUSB.c(1859): warning:  #177-D: variable "pInfraDevice" was declared but never referenced
+creating preprocessor file for main.c...
+source\main.c(6): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+source\main.c(3): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(5): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(6): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+source\init.c(15): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(15): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+.\obj\maestronano.axf: Error: L6218E: Undefined symbol g_sBusOps (referred from drvusb.o).
+.\obj\maestronano.axf: Error: L6218E: Undefined symbol g_sUsbOps (referred from drvusb.o).
+.\obj\maestronano.axf: Error: L6218E: Undefined symbol sEpDescription (referred from drvusb.o).
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for HIDTransferSys.c...
+compiling HIDTransferSys.c...
+creating preprocessor file for HIDTransfer_API.c...
+USB_HID\HIDTransfer_API.c(12): error:  #5: cannot open source input file "i-tracker.h": No such file or directory
+compiling HIDTransfer_API.c...
+USB_HID\HIDTransfer_API.c(12): error:  #5: cannot open source input file "i-tracker.h": No such file or directory
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for HIDTransfer_API.c...
+compiling HIDTransfer_API.c...
+USB_HID\HIDTransfer_API.c(84): error:  #70: incomplete type is not allowed
+USB_HID\HIDTransfer_API.c(320): warning:  #223-D: function "memcpy" declared implicitly
+USB_HID\HIDTransfer_API.c(320): error:  #20: identifier "itracker_dev" is undefined
+USB_HID\HIDTransfer_API.c(307): warning:  #550-D: variable "u32StartPage" was set but never used
+USB_HID\HIDTransfer_API.c(309): warning:  #177-D: variable "i" was declared but never referenced
+USB_HID\HIDTransfer_API.c(337): warning:  #550-D: variable "u32StartPage" was set but never used
+USB_HID\HIDTransfer_API.c(338): warning:  #550-D: variable "u32Pages" was set but never used
+USB_HID\HIDTransfer_API.c(370): warning:  #223-D: function "Reading_Dataflash" declared implicitly
+USB_HID\HIDTransfer_API.c(370): error:  #20: identifier "updated_fw_header_base" is undefined
+USB_HID\HIDTransfer_API.c(373): warning:  #223-D: function "DrvFMC_Read" declared implicitly
+USB_HID\HIDTransfer_API.c(356): warning:  #177-D: variable "i" was declared but never referenced
+USB_HID\HIDTransfer_API.c(357): warning:  #550-D: variable "pBuf" was set but never used
+USB_HID\HIDTransfer_API.c(576): error:  #20: identifier "itracker_dev" is undefined
+USB_HID\HIDTransfer_API.c(582): error:  #20: identifier "itracker_dev" is undefined
+USB_HID\HIDTransfer_API.c(602): warning:  #223-D: function "DrvFMC_EnableISP" declared implicitly
+USB_HID\HIDTransfer_API.c(683): error:  #20: identifier "itracker_preference" is undefined
+USB_HID\HIDTransfer_API.c(686): warning:  #223-D: function "memcpy" declared implicitly
+USB_HID\HIDTransfer_API.c(689): warning:  #223-D: function "memcpy" declared implicitly
+USB_HID\HIDTransfer_API.c(717): warning:  #223-D: function "memcpy" declared implicitly
+USB_HID\HIDTransfer_API.c(730): warning:  #223-D: function "DrvFMC_Erase" declared implicitly
+USB_HID\HIDTransfer_API.c(730): error:  #20: identifier "updated_fw_header_base" is undefined
+USB_HID\HIDTransfer_API.c(731): warning:  #223-D: function "Programming_Dataflash" declared implicitly
+USB_HID\HIDTransfer_API.c(737): warning:  #223-D: function "DrvFMC_Erase" declared implicitly
+USB_HID\HIDTransfer_API.c(737): error:  #20: identifier "updated_fw_bin_base" is undefined
+USB_HID\HIDTransfer_API.c(738): warning:  #223-D: function "Programming_Dataflash" declared implicitly
+USB_HID\HIDTransfer_API.c(741): warning:  #223-D: function "Programming_Dataflash" declared implicitly
+USB_HID\HIDTransfer_API.c(741): error:  #20: identifier "updated_fw_bin_base" is undefined
+USB_HID\HIDTransfer_API.c(756): warning:  #223-D: function "DrvFMC_DisableISP" declared implicitly
+USB_HID\HIDTransfer_API.c(759): warning:  #223-D: function "DrvFMC_BootSelect" declared implicitly
+USB_HID\HIDTransfer_API.c(759): error:  #20: identifier "E_FMC_LDROM" is undefined
+USB_HID\HIDTransfer_API.c(878): error:  #20: identifier "itracker_dev" is undefined
+USB_HID\HIDTransfer_API.c(879): warning:  #223-D: function "memset" declared implicitly
+USB_HID\HIDTransfer_API.c(885): error:  #20: identifier "itracker_dev" is undefined
+USB_HID\HIDTransfer_API.c(887): warning:  #223-D: function "memcpy" declared implicitly
+USB_HID\HIDTransfer_API.c(890): warning:  #223-D: function "memset" declared implicitly
+USB_HID\HIDTransfer_API.c(904): warning:  #223-D: function "DrvFMC_DisableISP" declared implicitly
+USB_HID\HIDTransfer_API.c(912): warning:  #223-D: function "Reading_Dataflash" declared implicitly
+USB_HID\HIDTransfer_API.c(912): error:  #20: identifier "updated_fw_header_base" is undefined
+USB_HID\HIDTransfer_API.c(913): warning:  #223-D: function "memcpy" declared implicitly
+USB_HID\HIDTransfer_API.c(917): warning:  #223-D: function "Reading_Dataflash" declared implicitly
+USB_HID\HIDTransfer_API.c(917): error:  #20: identifier "updated_fw_header_base" is undefined
+USB_HID\HIDTransfer_API.c(918): warning:  #223-D: function "memcpy" declared implicitly
+USB_HID\HIDTransfer_API.c(919): warning:  #223-D: function "memset" declared implicitly
+Target not created
+Build target 'MN-913A'
+compiling HIDTransfer_API.c...
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+.\obj\maestronano.axf: Error: L6218E: Undefined symbol Delay (referred from hidtransfer_api.o).
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for HIDTransfer_API.c...
+compiling HIDTransfer_API.c...
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=5044 RO-data=448 RW-data=524 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=5044 RO-data=448 RW-data=524 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+source\main.c(16): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+source\main.c(3): error:  #20: identifier "uint32_t" is undefined
+source\main.c(5): error:  #20: identifier "SysTick" is undefined
+source\main.c(7): error:  #20: identifier "SYSTICK_CLKSOURCE" is undefined
+source\main.c(7): error:  #20: identifier "SYSTICK_ENABLE" is undefined
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(16): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for HIDTransfer_API.c...
+compiling HIDTransfer_API.c...
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for DrvSYS.c...
+compiling DrvSYS.c...
+compiling main.c...
+source\main.c(3): error:  #20: identifier "uint32_t" is undefined
+source\main.c(5): error:  #20: identifier "SysTick" is undefined
+source\main.c(7): error:  #20: identifier "SYSTICK_CLKSOURCE" is undefined
+source\main.c(7): error:  #20: identifier "SYSTICK_ENABLE" is undefined
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(16): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+source\main.c(17): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+source\main.c(8): error:  #20: identifier "SYSTICK_CLKSOURCE" is undefined
+source\main.c(8): error:  #20: identifier "SYSTICK_ENABLE" is undefined
+source\main.c(14): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(16): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(17): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+source\main.c(17): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+source\main.c(8): error:  #20: identifier "SYSTICK_CLKSOURCE" is undefined
+source\main.c(8): error:  #20: identifier "SYSTICK_ENABLE" is undefined
+source\main.c(14): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(16): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(17): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+source\main.c(17): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+source\main.c(14): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(16): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(17): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=5124 RO-data=448 RW-data=532 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 4 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+source\main.c(1): error:  #5: cannot open source input file "MN-913A.h": No such file or directory
+compiling main.c...
+source\main.c(1): error:  #5: cannot open source input file "MN-913A.h": No such file or directory
+Target not created
+Build target 'MN-913A'
+compiling core_cm0.c...
+compiling system_NUC1xx.c...
+compiling retarget.c...
+compiling DrvUSB.c...
+..\..\..\Src\Driver\DrvUSB.c(695): warning:  #223-D: function "printf" declared implicitly
+..\..\..\Src\Driver\DrvUSB.c(697): warning:  #223-D: function "printf" declared implicitly
+..\..\..\Src\Driver\DrvUSB.c(673): warning:  #550-D: variable "buf2" was set but never used
+..\..\..\Src\Driver\DrvUSB.c(1861): warning:  #223-D: function "printf" declared implicitly
+..\..\..\Src\Driver\DrvUSB.c(1859): warning:  #177-D: variable "pInfraDevice" was declared but never referenced
+compiling DrvSYS.c...
+compiling main.c...
+.\header\MN-913A.h(2): warning:  #1-D: last line of file ends without a newline
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(16): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(15): warning:  #1-D: last line of file ends without a newline
+compiling HIDTransferSys.c...
+compiling HIDTransfer_API.c...
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=5124 RO-data=448 RW-data=532 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 11 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(2): warning:  #1-D: last line of file ends without a newline
+source\main.c(19): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(2): warning:  #1-D: last line of file ends without a newline
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(19): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=5168 RO-data=448 RW-data=532 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 5 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+source\init.c(37): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(7): error:  #20: identifier "STR_UART_T" is undefined
+source\init.c(14): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(37): warning:  #1-D: last line of file ends without a newline
+source\init.c(6): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(6): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+source\init.c(38): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(15): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(38): warning:  #1-D: last line of file ends without a newline
+source\init.c(7): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(7): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(8): warning:  #177-D: variable "param" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=6108 RO-data=448 RW-data=560 ZI-data=1352  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 6 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=6108 RO-data=448 RW-data=560 ZI-data=1352  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for DrvUART.c...
+compiling DrvUART.c...
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=6200 RO-data=448 RW-data=572 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+source\init.c(46): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(15): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(27): warning:  #223-D: function "DrvGPIO_InitFunction" declared implicitly
+source\init.c(27): error:  #20: identifier "FUNC_UART0" is undefined
+source\init.c(46): warning:  #1-D: last line of file ends without a newline
+source\init.c(7): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(7): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+source\init.c(46): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(15): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(27): warning:  #223-D: function "DrvGPIO_InitFunction" declared implicitly
+source\init.c(27): error:  #20: identifier "E_FUNC_UART0" is undefined
+source\init.c(46): warning:  #1-D: last line of file ends without a newline
+source\init.c(7): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(7): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+source\init.c(47): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(16): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(47): warning:  #1-D: last line of file ends without a newline
+source\init.c(8): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(8): warning:  #177-D: variable "j" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+.\obj\maestronano.axf: Error: L6218E: Undefined symbol DrvGPIO_InitFunction (referred from init.o).
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for DrvGPIO.c...
+compiling DrvGPIO.c...
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9404 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+source\init.c(59): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(16): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(40): error:  #136: struct "<unnamed>" has no field "CPO0_CLKO"
+source\init.c(59): warning:  #1-D: last line of file ends without a newline
+source\init.c(8): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(8): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+source\init.c(59): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(16): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(59): warning:  #1-D: last line of file ends without a newline
+source\init.c(8): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(8): warning:  #177-D: variable "j" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9504 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 5 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9504 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9504 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(2): warning:  #1-D: last line of file ends without a newline
+source\main.c(19): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(2): warning:  #1-D: last line of file ends without a newline
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(19): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9504 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 5 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9504 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9504 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9504 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(2): warning:  #1-D: last line of file ends without a newline
+source\main.c(20): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(2): warning:  #1-D: last line of file ends without a newline
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(20): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9524 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 5 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(2): warning:  #1-D: last line of file ends without a newline
+source\main.c(21): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(2): warning:  #1-D: last line of file ends without a newline
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(21): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9540 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 5 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9540 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(4): warning:  #1-D: last line of file ends without a newline
+source\main.c(21): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(4): warning:  #1-D: last line of file ends without a newline
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(21): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9540 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 5 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for HIDTransfer_API.c...
+compiling HIDTransfer_API.c...
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9540 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(4): warning:  #1-D: last line of file ends without a newline
+source\init.c(61): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(4): warning:  #1-D: last line of file ends without a newline
+source\init.c(17): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(51): warning:  #174-D: expression has no effect
+source\init.c(52): error:  #65: expected a ";"
+source\init.c(53): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(53): error:  #20: identifier "HID_GetInReport" is undefined
+source\init.c(53): error:  #20: identifier "HID_SetOutReport" is undefined
+source\init.c(61): warning:  #1-D: last line of file ends without a newline
+source\init.c(9): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(9): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+source\init.c(61): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+source\init.c(17): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(61): warning:  #1-D: last line of file ends without a newline
+source\init.c(9): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(9): warning:  #177-D: variable "j" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=9540 RO-data=464 RW-data=588 ZI-data=1356  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 5 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(4): warning:  #1-D: last line of file ends without a newline
+source\init.c(60): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(4): warning:  #1-D: last line of file ends without a newline
+source\init.c(17): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(52): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(52): error:  #20: identifier "HID_GetInReport" is undefined
+source\init.c(52): error:  #20: identifier "HID_SetOutReport" is undefined
+source\init.c(60): warning:  #1-D: last line of file ends without a newline
+source\init.c(9): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(9): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(4): warning:  #1-D: last line of file ends without a newline
+source\init.c(61): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(4): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(53): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(61): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=12028 RO-data=464 RW-data=596 ZI-data=1692  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 7 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=12028 RO-data=464 RW-data=596 ZI-data=1692  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for HIDTransfer_API.c...
+compiling HIDTransfer_API.c...
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=12028 RO-data=464 RW-data=596 ZI-data=1692  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(12): warning:  #1-D: last line of file ends without a newline
+.\header\MN-913A.h(7): error:  #37: the #endif for this directive is missing
+source\main.c(24): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(12): warning:  #1-D: last line of file ends without a newline
+.\header\MN-913A.h(7): error:  #37: the #endif for this directive is missing
+source\main.c(24): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(12): warning:  #1-D: last line of file ends without a newline
+.\header\MN-913A.h(7): error:  #37: the #endif for this directive is missing
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(12): warning:  #1-D: last line of file ends without a newline
+.\header\MN-913A.h(7): error:  #37: the #endif for this directive is missing
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(23): warning:  #1-D: last line of file ends without a newline
+source\main.c(24): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(23): warning:  #1-D: last line of file ends without a newline
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(24): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(23): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(23): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(47): error:  #20: identifier "FUNC_UART2" is undefined
+source\init.c(52): error:  #20: identifier "FUNC_UART1" is undefined
+source\init.c(62): error:  #20: identifier "FUNC_UART0" is undefined
+source\init.c(67): error:  #20: identifier "DRVUART_RLSNT" is undefined
+source\init.c(68): error:  #20: identifier "UART_INT_HANDLE" is undefined
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\main.c(24): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(24): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(47): error:  #20: identifier "FUNC_UART2" is undefined
+source\init.c(52): error:  #20: identifier "FUNC_UART1" is undefined
+source\init.c(62): error:  #20: identifier "FUNC_UART0" is undefined
+source\init.c(67): error:  #20: identifier "DRVUART_RLSNT" is undefined
+source\init.c(68): error:  #20: identifier "UART_INT_HANDLE" is undefined
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+compiling init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(47): error:  #20: identifier "FUNC_UART2" is undefined
+source\init.c(52): error:  #20: identifier "FUNC_UART1" is undefined
+source\init.c(62): error:  #20: identifier "FUNC_UART0" is undefined
+source\init.c(67): error:  #20: identifier "DRVUART_RLSNT" is undefined
+source\init.c(68): error:  #20: identifier "UART_INT_HANDLE" is undefined
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(52): error:  #20: identifier "FUNC_UART1" is undefined
+source\init.c(62): error:  #20: identifier "FUNC_UART0" is undefined
+source\init.c(67): error:  #20: identifier "DRVUART_RLSNT" is undefined
+source\init.c(68): error:  #20: identifier "UART_INT_HANDLE" is undefined
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(67): error:  #20: identifier "DRVUART_RLSNT" is undefined
+source\init.c(68): error:  #20: identifier "UART_INT_HANDLE" is undefined
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+compiling init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(67): error:  #20: identifier "DRVUART_RLSNT" is undefined
+source\init.c(68): error:  #20: identifier "UART_INT_HANDLE" is undefined
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(24): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(68): error:  #20: identifier "UART_INT_HANDLE" is undefined
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\main.c(24): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\main.c(13): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(15): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(24): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+compiling init.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+compiling init.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(72): error:  #165: too few arguments in function call
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+.\obj\maestronano.axf: Error: L6218E: Undefined symbol UART_INT_HANDLE (referred from init.o).
+Target not created
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+.\obj\maestronano.axf: Error: L6218E: Undefined symbol UART_INT_HANDLE (referred from init.o).
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\main.c(93): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(26): warning:  #1-D: last line of file ends without a newline
+source\main.c(14): error:  #20: identifier "RDAIE" is undefined
+source\main.c(14): error:  #20: identifier "RTOIE" is undefined
+source\main.c(28): error:  #20: identifier "bPrinter_status" is undefined
+source\main.c(47): error:  #20: identifier "THREIE" is undefined
+source\main.c(82): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(84): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(93): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\main.c(93): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\main.c(28): error:  #20: identifier "bPrinter_status" is undefined
+source\main.c(47): error:  #20: identifier "THREIE" is undefined
+source\main.c(82): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(84): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(93): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\main.c(93): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\main.c(28): error:  #20: identifier "bPrinter_status" is undefined
+source\main.c(82): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(84): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(93): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(28): warning:  #1-D: last line of file ends without a newline
+source\main.c(93): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(28): warning:  #1-D: last line of file ends without a newline
+source\main.c(82): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(84): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(93): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(28): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(28): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+.\obj\maestronano.axf: Error: L6200E: Symbol bPrinter_status multiply defined (by init.o and main.o).
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\main.c(95): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\main.c(84): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(86): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(95): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(27): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(103): warning:  #1-D: last line of file ends without a newline
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 11 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=13080 RO-data=464 RW-data=604 ZI-data=1756  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\main.c(95): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\main.c(84): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(86): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(95): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(111): error:  #20: identifier "GPA" is undefined
+source\init.c(111): error:  #20: identifier "IO_OUTPUT" is undefined
+source\init.c(116): error:  #20: identifier "GPB" is undefined
+source\init.c(116): error:  #20: identifier "IO_INPUT" is undefined
+source\init.c(120): error:  #136: struct "<unnamed>" has no field "INT1_SS31"
+source\init.c(124): error:  #20: identifier "GPC" is undefined
+source\init.c(125): error:  #20: identifier "GPE" is undefined
+source\init.c(126): error:  #20: identifier "IO_FALLING" is undefined
+source\init.c(126): error:  #20: identifier "MODE_EDGE" is undefined
+source\init.c(129): error:  #20: identifier "IO_RISING" is undefined
+source\init.c(130): error:  #20: identifier "DBCLKSRC_10K" is undefined
+source\init.c(137): error:  #20: identifier "GPABCallback" is undefined
+source\init.c(137): error:  #20: identifier "GPCDECallback" is undefined
+source\init.c(138): error:  #20: identifier "EINT0Callback" is undefined
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(126): error:  #20: identifier "MODE_EDGE" is undefined
+source\init.c(130): error:  #20: identifier "DBCLKSRC_10K" is undefined
+source\init.c(137): error:  #20: identifier "GPABCallback" is undefined
+source\init.c(137): error:  #20: identifier "GPCDECallback" is undefined
+source\init.c(138): error:  #20: identifier "EINT0Callback" is undefined
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(128): error:  #20: identifier "MODE_EDGE" is undefined
+source\init.c(137): error:  #20: identifier "GPABCallback" is undefined
+source\init.c(137): error:  #20: identifier "GPCDECallback" is undefined
+source\init.c(138): error:  #20: identifier "EINT0Callback" is undefined
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(29): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(137): error:  #20: identifier "GPABCallback" is undefined
+source\init.c(137): error:  #20: identifier "GPCDECallback" is undefined
+source\init.c(138): error:  #20: identifier "EINT0Callback" is undefined
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for DrvTimer.c...
+compiling DrvTimer.c...
+creating preprocessor file for main.c...
+.\header\MN-913A.h(31): warning:  #1-D: last line of file ends without a newline
+source\main.c(99): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(31): warning:  #1-D: last line of file ends without a newline
+source\main.c(88): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(90): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(99): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(31): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(31): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(137): error:  #20: identifier "GPABCallback" is undefined
+source\init.c(137): error:  #20: identifier "GPCDECallback" is undefined
+source\init.c(138): error:  #20: identifier "EINT0Callback" is undefined
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(32): warning:  #1-D: last line of file ends without a newline
+source\main.c(99): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(32): warning:  #1-D: last line of file ends without a newline
+source\main.c(88): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(90): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(99): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(32): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(32): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(137): error:  #20: identifier "GPABCallback" is undefined
+source\init.c(138): error:  #20: identifier "EINT0Callback" is undefined
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(33): warning:  #1-D: last line of file ends without a newline
+source\main.c(99): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(33): warning:  #1-D: last line of file ends without a newline
+source\main.c(88): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(90): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(99): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(33): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(33): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(138): error:  #20: identifier "EINT0Callback" is undefined
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(107): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(96): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(98): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(107): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=14028 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 16 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=14028 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=14028 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(108): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(96): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(98): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(99): warning:  #223-D: function "Init_Interface_IO" declared implicitly
+source\main.c(108): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=15080 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 6 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(108): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(96): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(98): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(99): warning:  #223-D: function "Init_Interface_IO" declared implicitly
+source\main.c(108): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(68): error:  #20: identifier "UART_INT_HANDLE" is undefined
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(137): error:  #20: identifier "GPABCallback" is undefined
+source\init.c(137): error:  #20: identifier "GPCDECallback" is undefined
+source\init.c(138): error:  #20: identifier "EINT0Callback" is undefined
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(108): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(96): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(98): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(99): warning:  #223-D: function "Init_Interface_IO" declared implicitly
+source\main.c(108): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(147): warning:  #1-D: last line of file ends without a newline
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=15080 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 17 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(109): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\main.c(96): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(98): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(99): warning:  #223-D: function "Init_Interface_IO" declared implicitly
+source\main.c(100): warning:  #223-D: function "MaestroNano_Init" declared implicitly
+source\main.c(109): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(150): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+source\init.c(150): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=15088 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 18 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=15088 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(162): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+source\init.c(162): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=15128 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 12 Warning(s).
+Build target 'MN-913A'
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=15128 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 1 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(166): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+source\init.c(166): warning:  #1-D: last line of file ends without a newline
+linking...
+.\obj\maestronano.axf: Warning: L6340W: options first and last are ignored for link type of scattered
+Program Size: Code=15168 RO-data=464 RW-data=708 ZI-data=1836  
+User command #1: fromelf --bin ".\obj\maestronano.axf" --output ".\obj\maestronano.bin"
+User command #2: fromelf --text -c ".\obj\maestronano.axf" --output ".\obj\maestronano.txt"
+".\obj\maestronano.axf" - 0 Error(s), 12 Warning(s).
+Build target 'MN-913A'
+creating preprocessor file for init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(182): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(34): warning:  #1-D: last line of file ends without a newline
+source\init.c(18): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(95): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(10): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(10): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(107): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(108): warning:  #177-D: variable "i32Err" was declared but never referenced
+source\init.c(156): warning:  #223-D: function "DrvSPI_Open" declared implicitly
+source\init.c(156): error:  #20: identifier "eDRVSPI_PORT1" is undefined
+source\init.c(156): error:  #20: identifier "eDRVSPI_MASTER" is undefined
+source\init.c(156): error:  #20: identifier "eDRVSPI_TYPE1" is undefined
+source\init.c(158): warning:  #223-D: function "DrvSPI_EnableAutoCS" declared implicitly
+source\init.c(158): error:  #20: identifier "eDRVSPI_SS0" is undefined
+source\init.c(160): warning:  #223-D: function "DrvSPI_SetSlaveSelectActiveLevel" declared implicitly
+source\init.c(160): error:  #20: identifier "eDRVSPI_ACTIVE_LOW_FALLING" is undefined
+source\init.c(164): warning:  #223-D: function "DrvSPI_SetClock" declared implicitly
+source\init.c(164): error:  #20: identifier "SPI_Clock" is undefined
+source\init.c(182): warning:  #1-D: last line of file ends without a newline
+Target not created
+Build target 'MN-913A'
+creating preprocessor file for DrvSPI.c...
+compiling DrvSPI.c...
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(21): error:  #20: identifier "BOOL" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(247): error:  #20: identifier "ERRCODE" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(251): error:  #20: identifier "SPI_PORT0" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(268): error:  #20: identifier "SPI_PORT1" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(273): error:  #136: struct "<unnamed>" has no field "SPI1_SS0"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(280): error:  #20: identifier "SPI_PORT2" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(286): error:  #136: struct "<unnamed>" has no field "SPI2_CLK"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(287): error:  #136: struct "<unnamed>" has no field "SPI2_MISO0"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(288): error:  #136: struct "<unnamed>" has no field "SPI2_MOSI0"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(289): error:  #136: struct "<unnamed>" has no field "ADC7_SS21"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(301): error:  #136: struct "<unnamed>" has no field "INT1_SS31"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(322): error:  #20: identifier "eDRVSPI_JOYSTICK" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(343): error:  #136: struct "<unnamed>" has no field "JS"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(344): error:  #136: struct "<unnamed>" has no field "JS"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(347): error:  #136: struct "<unnamed>" has no field "ASS"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(358): error:  #136: struct "<unnamed>" has no field "JS"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(363): error:  #136: struct "<unnamed>" has no field "ASS"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(448): error:  #20: identifier "SPI_PORT0" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(455): error:  #20: identifier "SPI_PORT1" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(462): error:  #20: identifier "SPI_PORT2" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(493): error:  #20: identifier "BOOL" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(499): error:  #20: identifier "SPI_PORT0" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(504): error:  #20: identifier "SPI_PORT1" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(509): error:  #20: identifier "SPI_PORT2" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(563): error:  #20: identifier "ERRCODE" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(593): error:  #20: identifier "ERRCODE" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(593): error:  #20: identifier "BOOL" is undefined
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(600): error:  #136: struct "<unnamed>" has no field "BYTE_SLEEP"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(602): error:  #136: struct "<unnamed>" has no field "BYTE_SLEEP"
+E:\NUC1xxBSP_v1.1.2\NUC1xxBSP\NuvotonPlatform_Keil\Src\Driver\DrvSPI.c(622): error:  #20: identifier "ERRCODE" is undefined
+creating preprocessor file for main.c...
+.\header\MN-913A.h(37): warning:  #1-D: last line of file ends without a newline
+source\main.c(109): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+.\header\MN-913A.h(37): warning:  #1-D: last line of file ends without a newline
+source\main.c(96): warning:  #951-D: return type of function "main" must be "int"
+source\main.c(98): warning:  #223-D: function "MN913A_init" declared implicitly
+source\main.c(99): warning:  #223-D: function "Init_Interface_IO" declared implicitly
+source\main.c(100): warning:  #223-D: function "MaestroNano_Init" declared implicitly
+source\main.c(109): warning:  #1-D: last line of file ends without a newline
+creating preprocessor file for init.c...
+.\header\MN-913A.h(37): warning:  #1-D: last line of file ends without a newline
+source\init.c(178): warning:  #1-D: last line of file ends without a newline
+compiling init.c...
+.\header\MN-913A.h(37): warning:  #1-D: last line of file ends without a newline
+source\init.c(14): warning:  #223-D: function "SysTimerDelay" declared implicitly
+source\init.c(91): warning:  #223-D: function "HID_Open" declared implicitly
+source\init.c(6): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(6): warning:  #177-D: variable "j" was declared but never referenced
+source\init.c(103): warning:  #177-D: variable "u32HCLK" was declared but never referenced
+source\init.c(103): warning:  #177-D: variable "u32data" was declared but never referenced
+source\init.c(103): warning:  #177-D: variable "i" was declared but never referenced
+source\init.c(103): warning:  #177-D: variable "pData" was declared but never referenced
+source\init.c(104): warning:  #177-D: variable "i32Err" was declared but never referenced
+source\init.c(154): warning:  #223-D: function "DrvSPI_EnableAutoCS" declared implicitly
+source\init.c(160): warning:  #223-D: function "DrvSPI_SetClock" declared implicitly
+source\init.c(160): error:  #20: identifier "SPI_Clock" is undefined
+source\init.c(178): warning:  #1-D: last line of file ends without a newline
+Target not created
