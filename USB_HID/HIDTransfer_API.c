@@ -371,10 +371,10 @@ int32_t ProcessCommand(uint8_t *pu8Buffer, uint32_t u32BufferLen)
 //for debug tablet usb command send
 //printf("receive command size: %d\n",  u32BufferLen);
 //printf("data byte: ");
-for (i = 0; i <  u32BufferLen; i++) {
+/*for (i = 0; i <  u32BufferLen; i++) {
    printf("%02x", pu8Buffer[i]);
 }
-printf("\n");
+printf("\n");*/
     /* Check size */
     if((gCmd.u8Size > sizeof(gCmd)) || (gCmd.u8Size > u32BufferLen))    
         return -1;
