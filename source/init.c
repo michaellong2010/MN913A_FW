@@ -132,6 +132,7 @@ void Init_Interface_IO(void)
   DrvGPIO_EnableDebounce(GPB, 14);
   DrvGPIO_EnableDebounce(GPB, 13);
   DrvGPIO_EnableDebounce(GPC, 0);
+  DrvGPIO_EnableDebounce(GPC, 6);
 
   DrvGPIO_SetIntCallback(GPABCallback, GPCDECallback);
   DrvGPIO_EnableEINT0(IO_FALLING, MODE_EDGE, EINT0Callback);
@@ -142,7 +143,8 @@ void Init_Interface_IO(void)
   DrvGPIO_Open(GPB, 10, IO_OUTPUT); //Conv
   DrvGPIO_ClrBit(GPB, 10);
   //DrvGPIO_ClrBit(GPB, 3);
-  DrvGPIO_Open(GPB, 11, IO_INPUT); //Xenon PWM
+  DrvGPIO_Open(GPB, 11, IO_OUTPUT); //Xenon PWM
+  DrvGPIO_ClrBit(GPB, 11);
 
 
 

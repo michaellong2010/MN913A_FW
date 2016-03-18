@@ -59,6 +59,7 @@ extern  struct MN913A_setting_type mn913a_preference;
 
 #define HID_CMD_MN913A_SETTING 0x86
 #define HID_CMD_MN913A_MEASURE 0x87
+#define HID_CMD_MN913A_RAW_DATA 0x88
 
 #define MAX_XENON_LEVEL 255
 #define MIN_XENON_LEVEL 0

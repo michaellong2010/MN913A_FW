@@ -73,6 +73,8 @@ void UART_INT_HANDLE(uint32_t u32IntStatus)
 
 void GPCDECallback(uint32_t u32GpcStatus, uint32_t u32GpdStatus, uint32_t u32GpeStatus)
 {
+  if (u32GpcStatus & (1 << 6)) {  //power_key
+  }
 }
 
 void EINT0Callback(void)
@@ -119,18 +121,17 @@ void GPABCallback(uint32_t u32GpaStatus, uint32_t u32GpbStatus)
 		switch (i) {
 		  case 0:
               //adc_temp[i] = SPI1->RX[0];
-			  adc_data2[cur_phase][adc_data_ready-6] = SPI1->RX[0];   //ch3, A230
+			  adc_data[cur_phase][adc_data_ready-6] = SPI1->RX[0];   //ch0, A280
 		      break;
-		  case 1:
-              //adc_data[cur_phase][adc_data_ready-6] = SPI1->RX[0];   //ch2, A280
-			  adc_temp[i] = SPI1->RX[0];
+		  case 1:              
+			  //adc_temp[i] = SPI1->RX[0];
+			  adc_data3[cur_phase][adc_data_ready-6] = SPI1->RX[0];   //ch3, A320
 		      break;
 		  case 2:
-		      adc_data1[cur_phase][adc_data_ready-6] = SPI1->RX[0];  //ch1, A260
+			  adc_data2[cur_phase][adc_data_ready-6] = SPI1->RX[0];   //ch2, A230
 		      break;
 		  case 3:
-		      //adc_data2[cur_phase][adc_data_ready-6] = SPI1->RX[0];  //ch0, A230
-			  adc_data[cur_phase][adc_data_ready-6] = SPI1->RX[0];  //ch0, A280
+			  adc_data1[cur_phase][adc_data_ready-6] = SPI1->RX[0];  //ch1, A260
 		      break;
 		}
         i++;
@@ -163,6 +164,11 @@ void main ( void )
 
   printf ( "MN-913A\n" );
   //SYS->GPBMFP.INT0_SS31 	=0;
+
+  /* 20160318 added by michael */
+  DrvTIMER_Init();
+  DrvTIMER_Open(TMR2,1,PERIODIC_MODE);
+  DrvTIMER_EnableInt(TMR2);
   
   /*20160111 added by michael*/
   while ( 1 ) {
@@ -187,7 +193,7 @@ void main ( void )
 		if ( recv_cmd == HID_CMD_MN913A_MEASURE ) {
 			printf ( "comsume command HID_CMD_MN913A_MEASURE\n" );
 			//getchar ();
-			SysTimerDelay ( 10 );
+			//SysTimerDelay ( 10 );
 			MaestroNano_Measure ( );
 			recv_cmd = 0;
 		}

@@ -1,8 +1,8 @@
 #include "measurement.h"
 
 volatile uint32_t adc_data_ready = 0, redundancy_entry = 0, cur_adc_data_ready = 0;
-double mean[Max_Evaluate_Iteration][3], mean1[Max_Evaluate_Iteration][3];
-int adc_data[Measure_phases][Measure_times], adc_data1[Measure_phases][Measure_times], adc_data2[Measure_phases][Measure_times];
+double mean[Max_Evaluate_Iteration][4], mean1[Max_Evaluate_Iteration][4];
+int adc_data[Measure_phases][Measure_times], adc_data1[Measure_phases][Measure_times], adc_data2[Measure_phases][Measure_times], adc_data3[Measure_phases][Measure_times];
 int cur_phase = 1, count2 = 0;
 int most_count, range_start_index, range_end_index;
 int zero_count = 0, adc_temp[4];
@@ -20,10 +20,16 @@ void MaestroNano_Capture(int phase) {
 #ifdef APP_DEBUG
   printf("start adc_data_ready: %d\n", adc_data_ready);
 #endif
+  /* 20160318 modified by michael */
+  DrvTIMER_ResetTicks(TMR2);
   while (adc_data_ready < (Measure_times+6)) {
     SysTimerDelay(5);
-	if (adc_data_ready==8 && !phase)
-	  break;
+	//if (adc_data_ready==8 && !phase)
+	  //break;
+	if ( DrvTIMER_GetTicks(TMR2) >= 9 ) {
+		printf ( "exit\n" );
+		break;
+	}
   }
 
   DDC114_Stop_Conversion();
@@ -61,6 +67,10 @@ void MaestroNano_Measure(void) {
 #ifdef MaestroNano_DEBUG
 	      printf("measure phase 1: blank_E\n");
 #endif
+		  memset ( adc_data, 0, sizeof ( adc_data ) );
+		  memset ( adc_data1, 0, sizeof ( adc_data1 ) );
+		  memset ( adc_data2, 0, sizeof ( adc_data2 ) );
+		  memset ( adc_data2, 0, sizeof ( adc_data3 ) );
           Xenon_Flash_On();
           //SysTimerDelay(1250); 
 		  //SysTimerDelay(31250/2); 
@@ -112,19 +122,22 @@ void MaestroNano_Measure(void) {
 
 #ifdef MaestroNano_DEBUG
   printf("phase 0&1\n");
-  mean[count2][0] = mean1[count2][0] = mean[count2][1] = mean1[count2][1] = mean[count2][2] = mean1[count2][2] = 0;
+  mean[count2][0] = mean1[count2][0] = mean[count2][1] = mean1[count2][1] = mean[count2][2] = mean1[count2][2] = mean[count2][3] = mean1[count2][3] = 0;
   //for (k = (Measure_times-10); k < Measure_times; k++) {
   for (k = range_start_index; k < range_end_index; k++) {
-     printf("%ld %ld %ld %ld %ld %ld\n", adc_data[0][1], adc_data[1][k], adc_data1[0][1], adc_data1[1][k], adc_data2[0][1], adc_data2[1][k]);
+     printf("%ld %ld %ld %ld %ld %ld %ld %ld\n", adc_data[0][k], adc_data[1][k], adc_data1[0][k], adc_data1[1][k], adc_data2[0][k], adc_data2[1][k], adc_data3[0][k], adc_data3[1][k]);
 //  A280
-     mean[count2][0] += adc_data[0][1];
+     mean[count2][0] += adc_data[0][k];
      mean1[count2][0] += adc_data[1][k];
 //  A260
-     mean[count2][1] += adc_data1[0][1];
+     mean[count2][1] += adc_data1[0][k];
      mean1[count2][1] += adc_data1[1][k];
 //  A230
-     mean[count2][2] += adc_data2[0][1];
+     mean[count2][2] += adc_data2[0][k];
      mean1[count2][2] += adc_data2[1][k];
+//  A320
+     mean[count2][3] += adc_data3[0][k];
+     mean1[count2][3] += adc_data3[1][k];
   }
   //most_count_arry[count2] = most_count;
   if (count2==(Max_Evaluate_Iteration-1))
@@ -138,7 +151,7 @@ void MaestroNano_Measure(void) {
   //if (getchar()=='a') {
     for (k = 0; k < count2; k++)  {
        //printf("%lf  %lf  %lf  %lf  %lf  %lf\n", mean[k][0]/(most_count_arry[k]), mean1[k][0]/(most_count_arry[k]), mean[k][1]/(most_count_arry[k]), mean1[k][1]/(most_count_arry[k]), mean[k][2]/(most_count_arry[k]), mean1[k][2]/(most_count_arry[k]));
-	   printf("%lf  %lf  %lf  %lf  %lf  %lf\n", mean[k][0]/(most_count), mean1[k][0]/(most_count), mean[k][1]/(most_count), mean1[k][1]/(most_count), mean[k][2]/(most_count), mean1[k][2]/(most_count));
+	   printf("%lf  %lf  %lf  %lf  %lf  %lf %lf %lf\n", mean[k][0]/(most_count), mean1[k][0]/(most_count), mean[k][1]/(most_count), mean1[k][1]/(most_count), mean[k][2]/(most_count), mean1[k][2]/(most_count), mean[k][3]/(most_count), mean1[k][3]/(most_count));
     }
     //getchar();
   //}

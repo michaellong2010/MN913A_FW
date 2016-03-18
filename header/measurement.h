@@ -67,7 +67,7 @@
 #define Increasing_Sample_Mode 1
 
 extern volatile uint32_t adc_data_ready, redundancy_entry, cur_adc_data_ready;
-extern int adc_data[Measure_phases][Measure_times], adc_data1[Measure_phases][Measure_times], adc_data2[Measure_phases][Measure_times];
+extern int adc_data[Measure_phases][Measure_times], adc_data1[Measure_phases][Measure_times], adc_data2[Measure_phases][Measure_times], adc_data3[Measure_phases][Measure_times];
 extern int most_count, range_start_index, range_end_index; 
 extern int adc_temp[4], zero_count, cur_phase;
 extern double Pass1_A260_Conc, Start_Dvalid_Xenon_PWM_CNR1, Stop_Dvalid_Xenon_PWM_CNR1, Start_Dvalid_Xenon_PWM_CNR2, Stop_Dvalid_Xenon_PWM_CNR2;

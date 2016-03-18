@@ -10,6 +10,7 @@
 #include "HIDTransferSys.h"
 #include "HIDTransfer_API.h"
 #include "MN-913A.h"
+#include "measurement.h"
 
 //#define DBG_PRINTF(...)
 #define DBG_PRINTF  printf
@@ -262,6 +263,36 @@ int32_t Recv_MN913A_Preference(CMD_T *pCmd)
     return 0;
 }
 
+int32_t Send_MN913A_RAW_DATA(CMD_T *pCmd)
+{
+    uint32_t u32StartPage;
+    uint32_t u32Pages;
+    int32_t i;
+
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+	//DBG_PRINTF("Retrieve i-tracker data - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+
+    //if (itracker_dev.buffer_locked)
+	  //return;
+    if(u32Pages)
+    {
+        memcpy ( g_u8PageBuff, &adc_data[ 0 ] [ 2 ], 100 );
+        g_u32BytesInPageBuf = PAGE_SIZE;
+        
+        /* The signature word is used as page counter */
+        pCmd->u32Signature = 1;
+        
+	    /* Trigger HID IN */
+        //SysTimerDelay(50000);
+		DrvUSB_DataIn(HID_IN_EP_NUM, g_u8PageBuff, HID_MAX_PACKET_SIZE_INT_IN);
+		g_u32BytesInPageBuf-= HID_MAX_PACKET_SIZE_INT_IN;	
+    }
+
+	return 0;
+}
+
 int32_t HID_CmdReadPages(CMD_T *pCmd)
 {
     uint32_t u32StartPage;
@@ -416,6 +447,14 @@ printf("\n");*/
 		case HID_CMD_MN913A_MEASURE:
 		    recv_cmd = HID_CMD_MN913A_MEASURE;
 		    break;
+		case HID_CMD_MN913A_RAW_DATA:
+			if ( recv_cmd == HID_CMD_MN913A_MEASURE ) {
+				printf ( "still in measuring!\n" );
+			}
+			else {
+				Send_MN913A_RAW_DATA ( &gCmd );
+			}
+			break;
 		default:
 			return -1;
 	}	
@@ -519,6 +558,7 @@ void HID_GetInReport(uint8_t *buf)
     uint32_t u32PageCnt;
     uint8_t u8Cmd;
 	int32_t i;
+	uint8_t *pBuf = NULL, base_page = 0;
     
     u8Cmd        = gCmd.u8Cmd;
     u32StartPage = gCmd.u32Arg1;
@@ -556,6 +596,78 @@ void HID_GetInReport(uint8_t *buf)
     		g_u32BytesInPageBuf -= HID_MAX_PACKET_SIZE_INT_IN;
 		}
 	}
+	else
+		/*adc_data[0][102] align page 0~1
+		  adc_data[1][102] align page 2~3
+		  adc_data1[0][102] align page 4~5
+		  adc_data1[1][102] align page 6~7
+		  adc_data2[0][102] align page 8~9
+		  adc_data2[1][102] align page 10~11
+		  adc_data3[0][102] align page 12~13
+		  adc_data3[1][102] align page 14~15
+		*/
+		if ( u8Cmd == HID_CMD_MN913A_RAW_DATA ) {
+			if ( ( u32PageCnt >= u32TotalPages ) && ( g_u32BytesInPageBuf == 0 ) )
+			{
+				/* The data transfer is complete. Reset coordinate buffer */
+				u8Cmd = HID_CMD_NONE;
+				DBG_PRINTF("MN913A transfer raw data complete!\n");
+			}
+			else {
+				if ( g_u32BytesInPageBuf == 0 ) {
+					if ( u32PageCnt >= 0 && u32PageCnt < 2 ) {
+						pBuf = ( uint8_t * )  &adc_data[0][2];
+						base_page = 0;
+					}
+					else
+						if ( u32PageCnt >= 2 && u32PageCnt < 4 ) {
+							pBuf = ( uint8_t * )  &adc_data[1][2];
+							base_page = 2;
+						}
+						else
+							if ( u32PageCnt >= 4 && u32PageCnt < 6 ) {
+								pBuf = ( uint8_t * )  &adc_data1[0][2];
+								base_page = 4;
+							}
+							else
+								if ( u32PageCnt >= 6 && u32PageCnt < 8 ) {
+									pBuf = ( uint8_t * )  &adc_data1[1][2];
+									base_page = 6;
+								}
+								else
+									if ( u32PageCnt >= 8 && u32PageCnt < 10 ) {
+										pBuf = ( uint8_t * )  &adc_data2[0][2];
+										base_page = 8;
+									}
+									else
+										if ( u32PageCnt >= 10 && u32PageCnt < 12 ) {
+											pBuf = ( uint8_t * )  &adc_data2[1][2];
+											base_page = 10;
+										}
+										else
+											if ( u32PageCnt >= 12 && u32PageCnt < 14 ) {
+												pBuf = ( uint8_t * )  &adc_data3[0][2];
+												base_page = 12;
+											}
+											else
+												if ( u32PageCnt >= 14 && u32PageCnt < 16 ) {
+													pBuf = ( uint8_t * )  &adc_data3[1][2];
+													base_page = 14;
+												}
+
+					if ( ( 400 - ( u32PageCnt - base_page ) * PAGE_SIZE ) >= PAGE_SIZE )
+						memcpy( g_u8PageBuff, pBuf + ( u32PageCnt - base_page ) * PAGE_SIZE, PAGE_SIZE );
+					else {
+						memcpy( g_u8PageBuff, pBuf + ( u32PageCnt - base_page ) * PAGE_SIZE, ( 400 - ( u32PageCnt - base_page ) * PAGE_SIZE ) );
+						memset( g_u8PageBuff + ( 400 - ( u32PageCnt - base_page ) * PAGE_SIZE ), 0,  PAGE_SIZE - ( 400 - ( u32PageCnt - base_page ) * PAGE_SIZE ) );
+					}
+					g_u32BytesInPageBuf = PAGE_SIZE;
+					u32PageCnt++;
+				}
+				DrvUSB_DataIn(HID_IN_EP_NUM, &g_u8PageBuff[PAGE_SIZE - g_u32BytesInPageBuf], HID_MAX_PACKET_SIZE_INT_IN);
+				g_u32BytesInPageBuf -= HID_MAX_PACKET_SIZE_INT_IN;
+			}
+		}
 	
 	gCmd.u8Cmd        = u8Cmd;
 	gCmd.u32Signature = u32PageCnt; 
