@@ -60,6 +60,7 @@ extern  struct MN913A_setting_type mn913a_preference;
 #define HID_CMD_MN913A_SETTING 0x86
 #define HID_CMD_MN913A_MEASURE 0x87
 #define HID_CMD_MN913A_RAW_DATA 0x88
+#define HID_CMD_MN913A_STATUS 0x89
 
 #define MAX_XENON_LEVEL 255
 #define MIN_XENON_LEVEL 0
@@ -71,4 +72,10 @@ extern  struct MN913A_setting_type mn913a_preference;
 #define AD5259_Word_Addr_WP 0x02
 #define AD5259_Word_Addr_Sync_EEPROM_RDAC 0x05
 #define AD5259_Word_Addr_Sync_RDAC_EEPROM 0x06
+
+/*20160318 added by michael*/
+struct MN913A_status_type {
+	BOOL remain_in_measure;
+};
+extern  struct MN913A_status_type mn913a_status;
 #endif

@@ -156,6 +156,7 @@ void SysTimerDelay(uint32_t us)
 }
 
 struct MN913A_setting_type mn913a_preference = { 0 };
+struct MN913A_status_type mn913a_status = { 1 };
 void main ( void )
 {
   MN913A_init ( );
@@ -194,9 +195,15 @@ void main ( void )
 			printf ( "comsume command HID_CMD_MN913A_MEASURE\n" );
 			//getchar ();
 			//SysTimerDelay ( 10 );
+			mn913a_status.remain_in_measure = 1;
 			MaestroNano_Measure ( );
+			//mn913a_status.remain_in_measure = 0;
 			recv_cmd = 0;
 		}
+		else
+		   if ( recv_cmd == HID_CMD_MN913A_STATUS ) {
+				 printf ( "comsume command HID_CMD_MN913A_STATUS\n" );
+			 }
 	//MaestroNano_Measure ( );
     SysTimerDelay ( 10 );
 #endif

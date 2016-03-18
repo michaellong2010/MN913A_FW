@@ -263,6 +263,33 @@ int32_t Recv_MN913A_Preference(CMD_T *pCmd)
     return 0;
 }
 
+int32_t Send_MN913A_STATUS(CMD_T *pCmd)
+{
+	  uint32_t u32StartPage;
+    uint32_t u32Pages;
+    int32_t i;
+
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+
+    if(u32Pages)
+    {
+        memcpy ( (void *) g_u8PageBuff, ( void * )&mn913a_status, (unsigned int)sizeof ( struct MN913A_status_type ) );
+        g_u32BytesInPageBuf = PAGE_SIZE;
+        
+        /* The signature word is used as page counter */
+        pCmd->u32Signature = 1;
+        
+	    /* Trigger HID IN */
+        //SysTimerDelay(50000);
+			DrvUSB_DataIn(HID_IN_EP_NUM, g_u8PageBuff, HID_MAX_PACKET_SIZE_INT_IN);
+			g_u32BytesInPageBuf-= HID_MAX_PACKET_SIZE_INT_IN;	
+    }
+		
+		return 0;
+}
+
 int32_t Send_MN913A_RAW_DATA(CMD_T *pCmd)
 {
     uint32_t u32StartPage;
@@ -278,7 +305,7 @@ int32_t Send_MN913A_RAW_DATA(CMD_T *pCmd)
 	  //return;
     if(u32Pages)
     {
-        memcpy ( g_u8PageBuff, &adc_data[ 0 ] [ 2 ], 100 );
+        memcpy ( g_u8PageBuff, &adc_data[ 0 ] [ 2 ], 256 );
         g_u32BytesInPageBuf = PAGE_SIZE;
         
         /* The signature word is used as page counter */
@@ -454,6 +481,9 @@ printf("\n");*/
 			else {
 				Send_MN913A_RAW_DATA ( &gCmd );
 			}
+			break;
+		case HID_CMD_MN913A_STATUS:
+			Send_MN913A_STATUS ( &gCmd );
 			break;
 		default:
 			return -1;
@@ -668,6 +698,17 @@ void HID_GetInReport(uint8_t *buf)
 				g_u32BytesInPageBuf -= HID_MAX_PACKET_SIZE_INT_IN;
 			}
 		}
+		else
+			if ( u8Cmd == HID_CMD_MN913A_STATUS ) {
+				if ( ( u32PageCnt >= u32TotalPages ) && ( g_u32BytesInPageBuf == 0 ) )
+				{
+					/* The data transfer is complete. Reset coordinate buffer */
+					u8Cmd = HID_CMD_NONE;
+					DBG_PRINTF("MN913A transfer status complete!\n");
+				}
+				DrvUSB_DataIn(HID_IN_EP_NUM, &g_u8PageBuff[PAGE_SIZE - g_u32BytesInPageBuf], HID_MAX_PACKET_SIZE_INT_IN);
+				g_u32BytesInPageBuf -= HID_MAX_PACKET_SIZE_INT_IN;
+			}
 	
 	gCmd.u8Cmd        = u8Cmd;
 	gCmd.u32Signature = u32PageCnt; 

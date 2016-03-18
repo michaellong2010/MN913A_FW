@@ -1,205 +1,205 @@
 Dependencies for Project 'maestronano', Target 'MN-913A': (DO NOT MODIFY !)
-F (.\startup_NUC1xx.s)(0x56CDC477)(--device DARMCM1 -g --16 --apcs=interwork -I "D:\Keil\ARM\INC\Nuvoton" --list ".\lst\startup_NUC1xx.lst" --xref -o ".\obj\startup_NUC1xx.o")
-F (..\..\..\..\CMSIS\CM0\system_NUC1xx.c)(0x4BCE5AE4)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\system_nuc1xx.o" --omf_browse ".\obj\system_nuc1xx.crf" --depend ".\obj\system_nuc1xx.d")
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-F (..\..\..\..\CMSIS\CM0\core_cm0.c)(0x4CCFF08B)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\core_cm0.o" --omf_browse ".\obj\core_cm0.crf" --depend ".\obj\core_cm0.d")
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-F (..\..\..\Src\Driver\DrvSYS.c)(0x4BCE5AF8)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\drvsys.o" --omf_browse ".\obj\drvsys.crf" --depend ".\obj\drvsys.d")
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-F (..\..\..\Src\Driver\DrvUART.c)(0x4BCE5AF8)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\drvuart.o" --omf_browse ".\obj\drvuart.crf" --depend ".\obj\drvuart.d")
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvUART.h)(0x4FA7475E)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-F (..\..\..\Src\Driver\DrvGPIO.c)(0x4DF6C6DC)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\drvgpio.o" --omf_browse ".\obj\drvgpio.crf" --depend ".\obj\drvgpio.d")
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
-F (..\..\..\Src\Driver\DrvTimer.c)(0x4BCE5AF8)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\drvtimer.o" --omf_browse ".\obj\drvtimer.crf" --depend ".\obj\drvtimer.d")
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvTimer.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-F (.\source\DrvPWM.c)(0x56CDC477)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\drvpwm.o" --omf_browse ".\obj\drvpwm.crf" --depend ".\obj\drvpwm.d")
-I (..\..\..\Include\Driver\DrvPWM.h)(0x4D5A2170)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-F (.\source\retarget.c)(0x56CDC477)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\retarget.o" --omf_browse ".\obj\retarget.crf" --depend ".\obj\retarget.d")
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (.\header\MN-913A.h)(0x56CD6BC8)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUART.h)(0x4FA7475E)
-I (..\..\..\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUSB.h)(0x4E2D0152)
-I (..\..\..\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvSPI.h)(0x4CD27910)
-I (..\..\..\Include\Driver\DrvPWM.h)(0x4D5A2170)
-I (..\..\..\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
-I (.\header\measurement.h)(0x56EB73A3)
-F (.\USB_HID\DrvUSB.c)(0x56CDC476)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\drvusb.o" --omf_browse ".\obj\drvusb.crf" --depend ".\obj\drvusb.d")
-I (..\..\..\Include\Driver\DrvUSB.h)(0x4E2D0152)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-F (..\..\..\Src\Driver\DrvSPI.c)(0x4D5C890A)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\drvspi.o" --omf_browse ".\obj\drvspi.crf" --depend ".\obj\drvspi.d")
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvSPI.h)(0x4CD27910)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-F (..\..\..\Src\Driver\DrvI2C.c)(0x4DAD197D)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\drvi2c.o" --omf_browse ".\obj\drvi2c.crf" --depend ".\obj\drvi2c.d")
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
-F (.\source\main.c)(0x56EB6BD5)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\main.o" --omf_browse ".\obj\main.crf" --depend ".\obj\main.d")
-I (.\header\MN-913A.h)(0x56CD6BC8)
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUART.h)(0x4FA7475E)
-I (..\..\..\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUSB.h)(0x4E2D0152)
-I (..\..\..\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvSPI.h)(0x4CD27910)
-I (..\..\..\Include\Driver\DrvPWM.h)(0x4D5A2170)
-I (..\..\..\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
-I (.\header\measurement.h)(0x56EB73A3)
-F (.\source\init.c)(0x56D019FD)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\init.o" --omf_browse ".\obj\init.crf" --depend ".\obj\init.d")
-I (.\header\MN-913A.h)(0x56CD6BC8)
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUART.h)(0x4FA7475E)
-I (..\..\..\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUSB.h)(0x4E2D0152)
-I (..\..\..\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvSPI.h)(0x4CD27910)
-I (..\..\..\Include\Driver\DrvPWM.h)(0x4D5A2170)
-I (..\..\..\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
-I (.\header\measurement.h)(0x56EB73A3)
-F (.\source\measurement.c)(0x56EB6C9E)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\measurement.o" --omf_browse ".\obj\measurement.crf" --depend ".\obj\measurement.d")
-I (.\header\measurement.h)(0x56EB73A3)
-I (.\header\MN-913A.h)(0x56CD6BC8)
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUART.h)(0x4FA7475E)
-I (..\..\..\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUSB.h)(0x4E2D0152)
-I (..\..\..\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvSPI.h)(0x4CD27910)
-I (..\..\..\Include\Driver\DrvPWM.h)(0x4D5A2170)
-I (..\..\..\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
-F (.\USB_HID\HIDTransfer_API.c)(0x56CFDF98)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\hidtransfer_api.o" --omf_browse ".\obj\hidtransfer_api.crf" --depend ".\obj\hidtransfer_api.d")
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUSB.h)(0x4E2D0152)
-I (USB_HID\HIDTransferSys.h)(0x56CDC476)
-I (USB_HID\HIDTransfer_API.h)(0x56CDC476)
-I (.\header\MN-913A.h)(0x56CD6BC8)
-I (..\..\..\Include\Driver\DrvUART.h)(0x4FA7475E)
-I (..\..\..\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvSPI.h)(0x4CD27910)
-I (..\..\..\Include\Driver\DrvPWM.h)(0x4D5A2170)
-I (..\..\..\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
-I (.\header\measurement.h)(0x56EB73A3)
-F (.\USB_HID\HIDTransferSys.c)(0x56CDC476)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\hidtransfersys.o" --omf_browse ".\obj\hidtransfersys.crf" --depend ".\obj\hidtransfersys.d")
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (D:\Keil\ARM\RV31\INC\string.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (USB_HID\HIDTransferSys.h)(0x56CDC476)
-I (..\..\..\Include\Driver/DrvUSB.h)(0x4E2D0152)
-I (USB_HID\HIDTransfer_API.h)(0x56CDC476)
-F (.\source\peripheral.c)(0x56CDC477)(-c --device DARMCM1 -g -O0 --apcs=interwork --split_sections --asm --interleave -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header -I "D:\Keil\ARM\INC\Nuvoton" -o ".\obj\peripheral.o" --omf_browse ".\obj\peripheral.crf" --depend ".\obj\peripheral.d")
-I (.\header\MN-913A.h)(0x56CD6BC8)
-I (D:\Keil\ARM\RV31\INC\stdio.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
-I (..\..\..\..\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
-I (D:\Keil\ARM\RV31\INC\stdint.h)(0x4A02846A)
-I (..\..\..\..\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
-I (..\..\..\Include\System\SysInfra.h)(0x4BCE5AE8)
-I (..\..\..\Include\System\ModuleID.h)(0x4BCE5AE8)
-I (..\..\..\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUART.h)(0x4FA7475E)
-I (..\..\..\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvUSB.h)(0x4E2D0152)
-I (..\..\..\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
-I (..\..\..\Include\Driver\DrvSPI.h)(0x4CD27910)
-I (..\..\..\Include\Driver\DrvPWM.h)(0x4D5A2170)
-I (..\..\..\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
-I (.\header\measurement.h)(0x56EB73A3)
+F (.\startup_NUC1xx.s)(0x50C6DF8E)(--cpu Cortex-M0 -g --16 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include--list .\lst\startup_nuc1xx.lst --xref -o .\obj\startup_nuc1xx.o --depend .\obj\startup_nuc1xx.d)
+F (..\..\..\..\CMSIS\CM0\system_NUC1xx.c)(0x4BCE5AE4)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\system_nuc1xx.o --list_dir ".\\lst\\" --list --omf_browse .\obj\system_nuc1xx.crf --depend .\obj\system_nuc1xx.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+F (..\..\..\..\CMSIS\CM0\core_cm0.c)(0x4CCFF08B)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\core_cm0.o --list_dir ".\\lst\\" --list --omf_browse .\obj\core_cm0.crf --depend .\obj\core_cm0.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+F (..\..\..\Src\Driver\DrvSYS.c)(0x4BCE5AF8)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\drvsys.o --list_dir ".\\lst\\" --list --omf_browse .\obj\drvsys.crf --depend .\obj\drvsys.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+F (..\..\..\Src\Driver\DrvUART.c)(0x4BCE5AF8)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\drvuart.o --list_dir ".\\lst\\" --list --omf_browse .\obj\drvuart.crf --depend .\obj\drvuart.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUART.h)(0x4FA7475E)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+F (..\..\..\Src\Driver\DrvGPIO.c)(0x4DF6C6DC)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\drvgpio.o --list_dir ".\\lst\\" --list --omf_browse .\obj\drvgpio.crf --depend .\obj\drvgpio.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
+F (..\..\..\Src\Driver\DrvTimer.c)(0x4BCE5AF8)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\drvtimer.o --list_dir ".\\lst\\" --list --omf_browse .\obj\drvtimer.crf --depend .\obj\drvtimer.d)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvTimer.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+F (.\source\DrvPWM.c)(0x56EB783D)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\drvpwm.o --list_dir ".\\lst\\" --list --omf_browse .\obj\drvpwm.crf --depend .\obj\drvpwm.d)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvPWM.h)(0x4D5A2170)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+F (.\source\retarget.c)(0x569867EB)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\retarget.o --list_dir ".\\lst\\" --list --omf_browse .\obj\retarget.crf --depend .\obj\retarget.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\MN-913A.h)(0x56EB7840)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUART.h)(0x4FA7475E)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUSB.h)(0x4E2D0152)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSPI.h)(0x4CD27910)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvPWM.h)(0x4D5A2170)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\measurement.h)(0x56EB7840)
+F (.\USB_HID\DrvUSB.c)(0x569CBB9E)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\drvusb.o --list_dir ".\\lst\\" --list --omf_browse .\obj\drvusb.crf --depend .\obj\drvusb.d)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUSB.h)(0x4E2D0152)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+F (..\..\..\Src\Driver\DrvSPI.c)(0x4D5C890A)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\drvspi.o --list_dir ".\\lst\\" --list --omf_browse .\obj\drvspi.crf --depend .\obj\drvspi.d)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSPI.h)(0x4CD27910)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+F (..\..\..\Src\Driver\DrvI2C.c)(0x4DAD197D)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\drvi2c.o --list_dir ".\\lst\\" --list --omf_browse .\obj\drvi2c.crf --depend .\obj\drvi2c.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
+F (.\source\main.c)(0x56EB7840)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\main.o --list_dir ".\\lst\\" --list --omf_browse .\obj\main.crf --depend .\obj\main.d)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\MN-913A.h)(0x56EB7840)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUART.h)(0x4FA7475E)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUSB.h)(0x4E2D0152)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSPI.h)(0x4CD27910)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvPWM.h)(0x4D5A2170)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\measurement.h)(0x56EB7840)
+F (.\source\init.c)(0x56EB7840)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\init.o --list_dir ".\\lst\\" --list --omf_browse .\obj\init.crf --depend .\obj\init.d)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\MN-913A.h)(0x56EB7840)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUART.h)(0x4FA7475E)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUSB.h)(0x4E2D0152)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSPI.h)(0x4CD27910)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvPWM.h)(0x4D5A2170)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\measurement.h)(0x56EB7840)
+F (.\source\measurement.c)(0x56EB7840)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\measurement.o --list_dir ".\\lst\\" --list --omf_browse .\obj\measurement.crf --depend .\obj\measurement.d)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\measurement.h)(0x56EB7840)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\MN-913A.h)(0x56EB7840)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUART.h)(0x4FA7475E)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUSB.h)(0x4E2D0152)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSPI.h)(0x4CD27910)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvPWM.h)(0x4D5A2170)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
+F (.\USB_HID\HIDTransfer_API.c)(0x56EB7840)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\hidtransfer_api.o --list_dir ".\\lst\\" --list --omf_browse .\obj\hidtransfer_api.crf --depend .\obj\hidtransfer_api.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUSB.h)(0x4E2D0152)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\USB_HID\HIDTransferSys.h)(0x4E1D62F8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\USB_HID\HIDTransfer_API.h)(0x4E1D62F8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\MN-913A.h)(0x56EB7840)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUART.h)(0x4FA7475E)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSPI.h)(0x4CD27910)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvPWM.h)(0x4D5A2170)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\measurement.h)(0x56EB7840)
+F (.\USB_HID\HIDTransferSys.c)(0x4FF526D1)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\hidtransfersys.o --list_dir ".\\lst\\" --list --omf_browse .\obj\hidtransfersys.crf --depend .\obj\hidtransfersys.d)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\USB_HID\HIDTransferSys.h)(0x4E1D62F8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUSB.h)(0x4E2D0152)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\USB_HID\HIDTransfer_API.h)(0x4E1D62F8)
+F (.\source\peripheral.c)(0x56A037C0)(-c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I.\ -I..\..\..\..\HW -I..\..\..\..\CMSIS\CM0\DeviceSupport\Nuvoton\NUC1xx -I..\..\..\Include -I..\..\..\Include\Driver -I..\..\..\..\CMSIS\CM0\ -I..\..\..\Include\USB -I.\header-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-o .\obj\peripheral.o --list_dir ".\\lst\\" --list --omf_browse .\obj\peripheral.crf --depend .\obj\peripheral.d)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\MN-913A.h)(0x56EB7840)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\NUC1xx.h)(0x4BEB6466)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\core_cm0.h)(0x4BCE5AE4)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\CMSIS\CM0\system_NUC1xx.h)(0x4BCE5AE4)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\SysInfra.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\System\ModuleID.h)(0x4BCE5AE8)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSYS.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUART.h)(0x4FA7475E)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvTIMER.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvUSB.h)(0x4E2D0152)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvGPIO.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvSPI.h)(0x4CD27910)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvPWM.h)(0x4D5A2170)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Include\Driver\DrvI2C.h)(0x4BCE5AE6)
+I (D:\job\Nuvoton\NUC1xxBSP_v1.1.2\NuvotonPlatform_Keil\Sample\My work\MN-913A\header\measurement.h)(0x56EB7840)
