@@ -195,9 +195,8 @@ void main ( void )
 			printf ( "comsume command HID_CMD_MN913A_MEASURE\n" );
 			//getchar ();
 			//SysTimerDelay ( 10 );
-			mn913a_status.remain_in_measure = 1;
 			MaestroNano_Measure ( );
-			//mn913a_status.remain_in_measure = 0;
+			mn913a_status.remain_in_measure = 0;
 			recv_cmd = 0;
 		}
 		else
