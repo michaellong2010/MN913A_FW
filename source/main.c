@@ -74,6 +74,7 @@ void UART_INT_HANDLE(uint32_t u32IntStatus)
 void GPCDECallback(uint32_t u32GpcStatus, uint32_t u32GpdStatus, uint32_t u32GpeStatus)
 {
   if (u32GpcStatus & (1 << 6)) {  //power_key
+	  DrvGPIO_SetBit ( GPB, 11 );
   }
 }
 
@@ -155,7 +156,7 @@ void SysTimerDelay(uint32_t us)
   while ((SysTick->CTRL &(1 << 16)) == 0);
 }
 
-struct MN913A_setting_type mn913a_preference = { 0 };
+struct MN913A_setting_type mn913a_preference = { 0, Illumination_LED_ON_State };
 struct MN913A_status_type mn913a_status = { 1 };
 void main ( void )
 {
@@ -189,13 +190,29 @@ void main ( void )
 			printf ( "AD5259 read RDAC: %d\n", mn913a_preference.Xenon_Voltage_Level );
 		if ( !Get_AD5259_Potential ( AD5259_Word_Addr_EEPROM, &mn913a_preference.Xenon_Voltage_Level ) )
 			printf ( "AD5259 read EEPROM: %d\n", mn913a_preference.Xenon_Voltage_Level );
+
+		if ( mn913a_preference.Illumination_State == Illumination_LED_ON_State ) {
+			Illumination_LED_ON()
+			mn913a_preference.Illumination_State = Illumination_LED_ON_State;
+		}
+		else {
+			Illumination_LED_OFF()
+			mn913a_preference.Illumination_State = Illumination_LED_OFF_State;
+		}
 	}
 	else
 		if ( recv_cmd == HID_CMD_MN913A_MEASURE ) {
 			printf ( "comsume command HID_CMD_MN913A_MEASURE\n" );
 			//getchar ();
 			//SysTimerDelay ( 10 );
+			Xenon_PWR_ON ( );
+			Illumination_LED_OFF ( );
 			MaestroNano_Measure ( );
+			if ( mn913a_preference.Illumination_State == Illumination_LED_ON_State )
+				Illumination_LED_ON ( )
+			else
+				Illumination_LED_OFF ( )
+			Xenon_PWR_OFF ( );
 			mn913a_status.remain_in_measure = 0;
 			recv_cmd = 0;
 		}

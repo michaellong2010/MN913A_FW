@@ -112,7 +112,7 @@ void Init_Interface_IO(void)
   DrvGPIO_Open(GPA, 7, IO_OUTPUT);
 #endif
 
-  DrvGPIO_Open(GPB, 9, IO_INPUT); //up_key
+  //DrvGPIO_Open(GPB, 9, IO_INPUT); //up_key
   SYS->GPBMFP.TM1_SS11 = 0;
   /*20130417 added by michael
   switch PB.14/INT0 to  INT0*/
@@ -120,18 +120,18 @@ void Init_Interface_IO(void)
   SYS->ALTMFP.PB14_S31    =0;
   //DrvGPIO_Open(GPB, 14, IO_INPUT);  //down_key
   DrvGPIO_Open(GPB, 13, IO_INPUT);  //enter_key
-  DrvGPIO_Open(GPC, 0, IO_INPUT);  //inform MCU--->PC0
+  DrvGPIO_Open(GPC, 6, IO_INPUT);  //inform MCU--->PC0
   DrvGPIO_Open(GPE, 5, IO_OUTPUT);  //output to Power control
-  DrvGPIO_EnableInt(GPB, 9, IO_FALLING, MODE_EDGE);
+  //DrvGPIO_EnableInt(GPB, 9, IO_FALLING, MODE_EDGE);
   //DrvGPIO_EnableInt(GPB, 14, IO_FALLING, MODE_EDGE);
   DrvGPIO_EnableInt(GPB, 13, IO_FALLING, MODE_EDGE);
-  DrvGPIO_EnableInt(GPC, 0, IO_RISING, MODE_EDGE);
+  DrvGPIO_EnableInt(GPC, 6, IO_RISING, MODE_EDGE);
   DrvGPIO_SetDebounceTime(1, DBCLKSRC_10K);
-  DrvGPIO_EnableDebounce(GPB, 9);
+  //DrvGPIO_EnableDebounce(GPB, 9);
   //DrvGPIO_EnableDebounce(GPB, 15);
   DrvGPIO_EnableDebounce(GPB, 14);
   DrvGPIO_EnableDebounce(GPB, 13);
-  DrvGPIO_EnableDebounce(GPC, 0);
+  //DrvGPIO_EnableDebounce(GPC, 0);
   DrvGPIO_EnableDebounce(GPC, 6);
 
   DrvGPIO_SetIntCallback(GPABCallback, GPCDECallback);
@@ -145,6 +145,7 @@ void Init_Interface_IO(void)
   //DrvGPIO_ClrBit(GPB, 3);
   DrvGPIO_Open(GPB, 11, IO_OUTPUT); //Xenon PWM
   DrvGPIO_ClrBit(GPB, 11);
+  DrvGPIO_Open(GPB, 9, IO_OUTPUT);
 
 
 

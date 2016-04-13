@@ -52,6 +52,7 @@ void EINT0Callback(void);
 
 struct MN913A_setting_type {
 	int Xenon_Voltage_Level;
+	int Illumination_State;
 };
 
 extern uint8_t recv_cmd;
@@ -78,4 +79,8 @@ struct MN913A_status_type {
 	BOOL remain_in_measure;
 };
 extern  struct MN913A_status_type mn913a_status;
+
+/* 20160325 added by michael */
+#define Illumination_LED_ON_State 0
+#define Illumination_LED_OFF_State 1
 #endif

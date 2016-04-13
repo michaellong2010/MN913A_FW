@@ -47,6 +47,12 @@
     while(DrvPWM_GetTimerCounter(DRVPWM_TIMER3)); \
     DrvPWM_Enable(DRVPWM_TIMER3, 0); \
   }
+
+/* 20160325 added by michael */
+#define Xenon_PWR_ON() DrvGPIO_SetBit ( GPB, 10 );
+#define Xenon_PWR_OFF() DrvGPIO_ClrBit ( GPB, 10 );
+#define Illumination_LED_ON() DrvGPIO_SetBit ( GPB, 9 );
+#define Illumination_LED_OFF() DrvGPIO_ClrBit ( GPB, 9 );
 #else
 #define DDC114_Start_Conversion() DrvGPIO_SetBit(GPB, 10)
 #define DDC114_Stop_Conversion() DrvGPIO_ClrBit(GPB, 10);
