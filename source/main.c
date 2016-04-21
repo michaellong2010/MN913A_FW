@@ -1,6 +1,8 @@
 #include <MN-913A.h>
 
 volatile uint8_t bPrinter_status;
+char buf2[100];
+void printer_test();
 
 #ifdef PRINTER_PORT
 #define RXBUFSIZE 64
@@ -21,7 +23,7 @@ void UART_INT_HANDLE(uint32_t u32IntStatus)
 #if PRINTER_PORT_ID==0
 		while(UART0->ISR.RDA_IF==1 || UART0->ISR.TOUT_IF==1)
 #elif  PRINTER_PORT_ID==1
-		while(UART1->ISR.RDA_IF==1 || UART0->ISR.TOUT_IF==1)
+		while(UART1->ISR.RDA_IF==1 || UART1->ISR.TOUT_IF==1)
 #else
 #endif
 		{
@@ -144,6 +146,10 @@ void GPABCallback(uint32_t u32GpaStatus, uint32_t u32GpbStatus)
 	}
 	adc_data_ready++;
   }
+	else
+		if ( (u32GpaStatus & 0x4000) ) {  //GPA.14 interrupt
+			printf ( "Auto measure detected!\n" );
+		}
 }
 
 void SysTimerDelay(uint32_t us)
@@ -158,8 +164,11 @@ void SysTimerDelay(uint32_t us)
 
 struct MN913A_setting_type mn913a_preference = { 0, Illumination_LED_ON_State };
 struct MN913A_status_type mn913a_status = { 1 };
+struct MN913A_dna_result_type mn913a_dna_result_data = { 0 };
+struct MN913A_protein_result_type mn913a_protein_result_data = { 0 };
 void main ( void )
 {
+  int i = 0;
   MN913A_init ( );
   Init_Interface_IO ( );
   MaestroNano_Init ( );
@@ -171,7 +180,21 @@ void main ( void )
   DrvTIMER_Init();
   DrvTIMER_Open(TMR2,1,PERIODIC_MODE);
   DrvTIMER_EnableInt(TMR2);
+
+  //while ( 1 ) {
+    //getchar ( );
+	  //printer_test ();
+	//return;
+  //}
   
+	printf ( "%d\n", sizeof (double) );
+	printf ( "%d\n",  &mn913a_dna_result_data.type );
+	printf ( "%d\n",  &mn913a_dna_result_data.count );
+	printf ( "%d\n", &mn913a_dna_result_data.dna_data[ i ].index );
+	printf ( "%d\n", &mn913a_dna_result_data.dna_data[ i ].conc );
+	//for ( i = 0; i < 10; i++ ) {
+		//printf ( "%d\n", &mn913a_dna_result_data.dna_data[ i ] );
+  //}
   /*20160111 added by michael*/
   while ( 1 ) {
     //getchar ();
@@ -220,8 +243,129 @@ void main ( void )
 		   if ( recv_cmd == HID_CMD_MN913A_STATUS ) {
 				 printf ( "comsume command HID_CMD_MN913A_STATUS\n" );
 			 }
+			 else
+				  if ( recv_cmd == HID_CMD_PRINT_DNA_RESULT ) {
+						printf ( "comsume command HID_CMD_PRINT_DNA_RESULT\n" );
+						recv_cmd = 0;
+					}
+					else
+						 if ( recv_cmd == HID_CMD_PRINT_PROTEIN_RESULT ) {
+							 printf ( "comsume command HID_CMD_PRINT_PROTEIN_RESULT\n" );
+							 recv_cmd = 0;
+						 }
 	//MaestroNano_Measure ( );
     SysTimerDelay ( 10 );
 #endif
   }
 }
+
+void Delay100ms(int a) {
+  int i = 0;
+
+  for (i = 0; i < (a*100); i++)
+      SysTimerDelay(1000);
+}
+
+#ifdef PRINTER_PORT
+void printer_test() {
+  buf2[0] = 0x1d; buf2[1] = 0x72; buf2[2] = 0x01;
+  DrvUART_Write(PRINTER_PORT, buf2, 3);
+  Delay100ms(2);
+
+  buf2[0] = 0x1d; buf2[1] = 0x72; buf2[2] = 0x03;
+  DrvUART_Write(PRINTER_PORT, buf2, 3);
+  Delay100ms(2);
+
+  buf2[0] = 0x12; buf2[1] = 0x77; buf2[2] = 0x01; buf2[3] = 0xfe; buf2[4] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, 5);
+
+  buf2[0] = 0x12; buf2[1] = 0x77; buf2[2] = 0x02; buf2[3] = 0xf9; buf2[4] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, 5);
+
+
+  sprintf(buf2, " michael is a good man, good husband, good father\n\r");
+  sprintf(buf2+strlen(buf2), " he full with love to family\n\r");
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+
+  sprintf(buf2, "\n\r\n\r");
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+
+  //buf2[0] = 0x1b; buf2[1] = 0x4a; buf2[2] = 0x05; buf2[3] = 0x00;
+  //DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+
+  sprintf(buf2, "\n\r\n\r");
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+	
+	buf2[0] = 0x1d; buf2[1] = 0x56; buf2[2] = 0x48; buf2[3] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+}
+
+void print_dna_result () {
+	int i = 0;
+	
+  if ( mn913a_dna_result_data.count > 0 ) {
+		switch ( mn913a_dna_result_data.type ) {
+			case 0:
+				strcpy(buf2, " ===============dsDNA===============\n\r");    
+				break;
+			case 1:
+				strcpy(buf2, " ===============ssDNA===============\n\r");
+				break;
+			case 2:
+				strcpy(buf2, " ================RNA================\n\r");
+				break;
+    }
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		
+		/*sprintf(buf2, " Date %04d/%02d/%02d\n\r", pSheet->sheet_date.PackDate.Year, pSheet->sheet_date.PackDate.Month, pSheet->sheet_date.PackDate.Day);
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, " Time %02d:%02d:%02d\n\r", pSheet->sheet_date.PackDate.Hour, pSheet->sheet_date.PackDate.Minute, pSheet->sheet_date.PackDate.Second);
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, " ==================================\n\r");
+    DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));*/
+		
+		for ( i = 0; i < mn913a_dna_result_data.count; i++ ) {
+			sprintf(buf2, "   sample_%d:\n\r", mn913a_dna_result_data.dna_data[i].index);
+			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+			
+			strcpy(buf2, "   A260       Conc.          \n\r");
+			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+    
+			sprintf( buf2, "    %2.3f", mn913a_dna_result_data.dna_data[i].A260 );
+			if ( mn913a_dna_result_data.dna_data[i].A260 < 10)
+				sprintf(buf2+strlen(buf2), "      %2.3f", mn913a_dna_result_data.dna_data[i].conc );
+			else
+			   sprintf(buf2+strlen(buf2), "     %2.3f", mn913a_dna_result_data.dna_data[i].conc );
+			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+			
+			strcpy(buf2, "   A260/A230       A260/A280\n\r");
+			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+      sprintf(buf2, "    %2.3f           %2.3f\n\r", mn913a_dna_result_data.dna_data[i].A260_A230, mn913a_dna_result_data.dna_data[i].A260_A280 );
+		  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		}
+	}
+}
+
+void print_protein_result () {
+	int i = 0;
+	if ( mn913a_protein_result_data.count > 0 ) {
+		strcpy(buf2, " ==============Protein==============\n\r");
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		
+		sprintf(buf2, "   sample_%d:\n\r", mn913a_protein_result_data.protein_data[i].index);
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		
+		for ( i = 0; i < mn913a_protein_result_data.count; i++ ) {
+			strcpy(buf2, "   A280");
+			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+      
+			sprintf(buf2, "    %2.3f\n\r", mn913a_protein_result_data.protein_data[i].A280);
+      DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+			 
+			sprintf(buf2, "   Conc.(ref.) %4.2f (mg/mL)\n\r", mn913a_protein_result_data.protein_data[i].A280);
+      sprintf(buf2+strlen(buf2), "   Conc.(BSA) %4.2f (mg/mL)\n\r\n\r", mn913a_protein_result_data.protein_data[i].A280*1.52);
+			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		}
+	}
+}
+#endif

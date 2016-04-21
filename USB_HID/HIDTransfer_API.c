@@ -246,6 +246,40 @@ int32_t HID_CmdEraseSectors(CMD_T *pCmd)
 	return 0;
 }
 
+int32_t Recv_MN913A_DNA_RESULT ( CMD_T *pCmd )
+{
+	  uint32_t u32StartPage;
+    uint32_t u32Pages;
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+
+	//DBG_PRINTF("Write command - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    DBG_PRINTF("MN913A dna result - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    g_u32BytesInPageBuf = 0;
+    
+    /* The signature is used to page counter */
+    pCmd->u32Signature = 0;
+	  return 0;
+}
+
+int32_t Recv_MN913A_PROTEIN_RESULT ( CMD_T *pCmd )
+{
+	  uint32_t u32StartPage;
+    uint32_t u32Pages;
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+
+	//DBG_PRINTF("Write command - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    DBG_PRINTF("MN913A protein result - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    g_u32BytesInPageBuf = 0;
+    
+    /* The signature is used to page counter */
+    pCmd->u32Signature = 0;
+	  return 0;
+}
+
 int32_t Recv_MN913A_Preference(CMD_T *pCmd)
 {
     uint32_t u32StartPage;
@@ -488,6 +522,12 @@ printf("\n");*/
 		case HID_CMD_MN913A_STATUS:
 			Send_MN913A_STATUS ( &gCmd );
 			break;
+		case HID_CMD_PRINT_DNA_RESULT:
+			Recv_MN913A_DNA_RESULT ( &gCmd );
+			break;
+		case HID_CMD_PRINT_PROTEIN_RESULT:
+			Recv_MN913A_PROTEIN_RESULT ( &gCmd );
+			break;
 		default:
 			return -1;
 	}	
@@ -575,6 +615,64 @@ void HID_SetOutReport(uint8_t *pu8EpBuf, uint32_t u32Size)
 			gCmd.u32Signature = u32PageCnt;
 		}
     else
+			  if ((u8Cmd == HID_CMD_PRINT_DNA_RESULT) &&  (u32PageCnt < u32Pages)) {
+			DrvUSB_memcpy(&g_u8PageBuff[g_u32BytesInPageBuf], pu8EpBuf, HID_MAX_PACKET_SIZE_INT_IN);
+			g_u32BytesInPageBuf += HID_MAX_PACKET_SIZE_INT_IN;
+
+			pBuf = (uint8_t *)  &mn913a_dna_result_data;
+			if (g_u32BytesInPageBuf >= PAGE_SIZE) {
+				if ((sizeof(mn913a_dna_result_data) - u32PageCnt*PAGE_SIZE) >= PAGE_SIZE) {
+					memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, PAGE_SIZE);
+				}
+				else {
+					memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, sizeof(mn913a_dna_result_data) - u32PageCnt*PAGE_SIZE);
+				}
+
+				u32PageCnt++;		
+				/* Setup preference command complete! */
+				if (u32PageCnt >= u32Pages)
+				{
+					u8Cmd = HID_CMD_NONE;	
+
+					DBG_PRINTF("Transfer dna result command complete %d %d.\n", mn913a_dna_result_data.count, mn913a_dna_result_data.type);
+					recv_cmd = HID_CMD_PRINT_DNA_RESULT;
+				}
+				g_u32BytesInPageBuf = 0;
+			}
+			/* Update command status */
+			gCmd.u8Cmd        = u8Cmd;
+			gCmd.u32Signature = u32PageCnt;
+				}
+				else
+				   if ((u8Cmd == HID_CMD_PRINT_PROTEIN_RESULT) &&  (u32PageCnt < u32Pages)) {
+			DrvUSB_memcpy(&g_u8PageBuff[g_u32BytesInPageBuf], pu8EpBuf, HID_MAX_PACKET_SIZE_INT_IN);
+			g_u32BytesInPageBuf += HID_MAX_PACKET_SIZE_INT_IN;
+
+			pBuf = (uint8_t *)  &mn913a_protein_result_data;
+			if (g_u32BytesInPageBuf >= PAGE_SIZE) {
+				if ((sizeof(mn913a_protein_result_data) - u32PageCnt*PAGE_SIZE) >= PAGE_SIZE) {
+					memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, PAGE_SIZE);
+				}
+				else {
+					memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, sizeof(mn913a_protein_result_data) - u32PageCnt*PAGE_SIZE);
+				}
+
+				u32PageCnt++;		
+				/* Setup preference command complete! */
+				if (u32PageCnt >= u32Pages)
+				{
+					u8Cmd = HID_CMD_NONE;	
+
+					DBG_PRINTF("Transfer protein result command complete %d.\n", mn913a_protein_result_data.count);
+					recv_cmd = HID_CMD_PRINT_PROTEIN_RESULT;
+				}
+				g_u32BytesInPageBuf = 0;
+			}
+			/* Update command status */
+			gCmd.u8Cmd        = u8Cmd;
+			gCmd.u32Signature = u32PageCnt;
+					 }
+				else
     {
         /* Check and process the command packet */
         if(ProcessCommand(pu8EpBuf, u32Size))

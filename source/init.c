@@ -8,6 +8,7 @@ double Pass1_A260_Conc = 0.0, Start_Dvalid_Xenon_PWM_CNR1= 0.0, Stop_Dvalid_Xeno
 void MN913A_init ( void ) {
   int i = 0, j = 0;
   STR_UART_T param;
+	UART_T *tUART;
   /* Unlock the locked registers before we can access them */
   UNLOCKREG ( x );
 
@@ -26,7 +27,7 @@ void MN913A_init ( void ) {
     clock source / (HCLK_N + 1) */
   //SystemCoreClockUpdate();
 
-  DrvGPIO_InitFunction(FUNC_UART0);
+  //DrvGPIO_InitFunction(FUNC_UART0);
   param.u32BaudRate = 115200;
   param.u8cDataBits = DRVUART_DATABITS_8;
   param.u8cStopBits = DRVUART_STOPBITS_1;
@@ -43,7 +44,7 @@ void MN913A_init ( void ) {
   DrvGPIO_InitFunction(FUNC_UART0);
   DrvUART_Open(DEBUG_INFO_PORT, &param);
 #else
-  DrvGPIO_InitFunction(E_FUNC_UART2);
+  DrvGPIO_InitFunction(FUNC_UART2);
   DrvUART_Open(DEBUG_INFO_PORT, &param);
 #endif
 #endif
@@ -58,23 +59,25 @@ void MN913A_init ( void ) {
 #ifdef MaestroNano_Fit_Mode  //fitting process
 #else
 
-  DrvGPIO_InitFunction(E_FUNC_UART0);
-  param.u32BaudRate = 9600;
-  //param.u32BaudRate = 115200;
-  param.u8cRxTriggerLevel = DRVUART_FIFO_30BYTES;
+  DrvGPIO_InitFunction(FUNC_UART0);
+  //param.u32BaudRate = 9600;
+  param.u32BaudRate = 115200;
+  //param.u8cRxTriggerLevel = DRVUART_FIFO_30BYTES;
   DrvUART_Open(PRINTER_PORT, &param);
-  DrvUART_DisableInt(PRINTER_PORT,DRVUART_RLSINT | DRVUART_THREINT | DRVUART_RDAINT | DRVUART_TOUTINT);
-  DrvUART_EnableInt(PRINTER_PORT, DRVUART_RLSINT | DRVUART_RDAINT | DRVUART_TOUTINT, UART_INT_HANDLE);
-#if Active_Printer==InHouse_Printer
+  DrvUART_DisableInt(PRINTER_PORT,DRVUART_RLSNT | DRVUART_THREINT | DRVUART_RDAINT | DRVUART_TOUTINT);
+  DrvUART_EnableInt(PRINTER_PORT, DRVUART_RLSNT | DRVUART_RDAINT | DRVUART_TOUTINT, UART_INT_HANDLE);
+	tUART = (UART_T *)((uint32_t)UART0 + PRINTER_PORT_ID);  
+//#if Active_Printer==InHouse_Printer
 /*20130808 added by michael*/
 /*Drive RTS to low(low active)*/
-  DrvUART_SetRTS(UART_PORT0, 1, DRVUART_FIFO_30BYTES);
+  DrvUART_SetRTS(UART_PORT0, 1);
+	tUART->FCR.RTS_TRIG_LEVEL = DRVUART_FIFO_8BYTES;
 /*20130808 added by michael*/
 //initialize the thermal printer
 //reset printer, "ESC @"=="1B 40"
   //buf2[0] = 0x1b; buf2[1] = 0x40;
   //DrvUART_Write(PRINTER_PORT, buf2, 2);
-#endif // Active_Printer
+//#endif // Active_Printer
 #endif
 
   /* using divide frequency clock output, Ref. man pg.155-156 */
@@ -121,7 +124,8 @@ void Init_Interface_IO(void)
   //DrvGPIO_Open(GPB, 14, IO_INPUT);  //down_key
   DrvGPIO_Open(GPB, 13, IO_INPUT);  //enter_key
   DrvGPIO_Open(GPC, 6, IO_INPUT);  //inform MCU--->PC0
-  DrvGPIO_Open(GPE, 5, IO_OUTPUT);  //output to Power control
+  DrvGPIO_Open(GPE, 5, IO_OUTPUT);  //output to printer Power control
+	DrvGPIO_SetBit(GPE, 5);
   //DrvGPIO_EnableInt(GPB, 9, IO_FALLING, MODE_EDGE);
   //DrvGPIO_EnableInt(GPB, 14, IO_FALLING, MODE_EDGE);
   DrvGPIO_EnableInt(GPB, 13, IO_FALLING, MODE_EDGE);
@@ -146,6 +150,9 @@ void Init_Interface_IO(void)
   DrvGPIO_Open(GPB, 11, IO_OUTPUT); //Xenon PWM
   DrvGPIO_ClrBit(GPB, 11);
   DrvGPIO_Open(GPB, 9, IO_OUTPUT);
+/*20160421 added by michael*/
+  DrvGPIO_Open(GPA, 14, IO_INPUT);
+  DrvGPIO_EnableInt(GPA, 14, IO_FALLING, MODE_EDGE);
 
 
 

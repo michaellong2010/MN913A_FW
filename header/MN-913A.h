@@ -14,7 +14,7 @@
 #include "measurement.h"
 
 #define USE_USB 1
-//#define MaestroNano_Fit_Mode 1
+#define MaestroNano_Fit_Mode 1
 
 #ifdef MaestroNano_Fit_Mode  //fitting process
 
@@ -62,6 +62,8 @@ extern  struct MN913A_setting_type mn913a_preference;
 #define HID_CMD_MN913A_MEASURE 0x87
 #define HID_CMD_MN913A_RAW_DATA 0x88
 #define HID_CMD_MN913A_STATUS 0x89
+#define HID_CMD_PRINT_DNA_RESULT 0x90
+#define HID_CMD_PRINT_PROTEIN_RESULT 0x91
 
 #define MAX_XENON_LEVEL 255
 #define MIN_XENON_LEVEL 0
@@ -83,4 +85,24 @@ extern  struct MN913A_status_type mn913a_status;
 /* 20160325 added by michael */
 #define Illumination_LED_ON_State 0
 #define Illumination_LED_OFF_State 1
+struct MN913A_dna_data_type {
+	int index;
+	double conc, A260, A260_A280, A260_A230;
+};
+struct MN913A_dna_result_type {
+  int type, count;
+	struct MN913A_dna_data_type dna_data [ 100 ];
+};
+
+struct MN913A_protein_data_type {
+	int index;
+	double A280;
+};
+struct MN913A_protein_result_type {
+  int count;
+	struct MN913A_protein_data_type protein_data [ 100 ];
+};
+
+extern struct MN913A_dna_result_type mn913a_dna_result_data;
+extern struct MN913A_protein_result_type mn913a_protein_result_data;
 #endif

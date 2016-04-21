@@ -67,7 +67,7 @@
 #define MaestroNano_DEBUG 1
 //#define SYS_DEBUG 1
 //#define Adjust_Intensity 1
-#define MaestroNano_Fit_Mode 1
+//#define MaestroNano_Fit_Mode 1
 #define MaestroNano_OD_Allow_Negative 1
 #define MaestroNano_Algo 1
 #define Increasing_Sample_Mode 1
