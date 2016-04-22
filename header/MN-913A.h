@@ -53,6 +53,7 @@ void EINT0Callback(void);
 struct MN913A_setting_type {
 	int Xenon_Voltage_Level;
 	int Illumination_State;
+	int start_calibration;
 };
 
 extern uint8_t recv_cmd;
@@ -79,6 +80,8 @@ extern  struct MN913A_setting_type mn913a_preference;
 /*20160318 added by michael*/
 struct MN913A_status_type {
 	BOOL remain_in_measure;
+	int max_voltage_level, min_voltage_level;
+	int max_voltage_intensity, min_voltage_intensity
 };
 extern  struct MN913A_status_type mn913a_status;
 
@@ -105,4 +108,15 @@ struct MN913A_protein_result_type {
 
 extern struct MN913A_dna_result_type mn913a_dna_result_data;
 extern struct MN913A_protein_result_type mn913a_protein_result_data;
+
+#define Xenon_Min_Voltag 3.17
+#define Xenon_Min_Voltag_index 162
+#define Xenon_Max_Voltag 4.7
+#define Xenon_Max_Voltag_index 242
+
+#define Target_Generic_A260_Intensity 850000
+#define Target_Lowest_A260_Intensity 350000
+void Construct_IV_table ();
+int Search_Target_Intensity ( int target_intensity );
+double Set_Voltage_Get_New_Intensity ( int voltag_level );
 #endif

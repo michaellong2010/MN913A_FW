@@ -1,5 +1,6 @@
 #include <MN-913A.h>
 
+int voltage_index_lower_bound = 0, voltage_index_upper_bound = 0;
 volatile uint8_t bPrinter_status;
 char buf2[100];
 void printer_test();
@@ -92,7 +93,7 @@ void GPABCallback(uint32_t u32GpaStatus, uint32_t u32GpbStatus)
 #ifdef SYS_DEBUG
   printf("GPAB Interrupt! GPA:0x%04x  GPB:0x%04x\n", u32GpaStatus, u32GpbStatus);
 #endif
-  if ((u32GpaStatus & 0x2000) && (adc_data_ready < (Measure_times+6))) {
+  if ((u32GpaStatus & 0x2000) && (adc_data_ready < (Measure_Count+6))) {
     cur_Xenon_PWM_CNR = DrvPWM_GetTimerCounter(DRVPWM_TIMER0) ;
 	/*Data_Valid_CNR[knight++] = cur_Xenon_PWM_CNR;
 	if (knight%100==0)
@@ -162,8 +163,8 @@ void SysTimerDelay(uint32_t us)
   while ((SysTick->CTRL &(1 << 16)) == 0);
 }
 
-struct MN913A_setting_type mn913a_preference = { 0, Illumination_LED_ON_State };
-struct MN913A_status_type mn913a_status = { 1 };
+struct MN913A_setting_type mn913a_preference = { 0, Illumination_LED_ON_State, 0 };
+struct MN913A_status_type mn913a_status = { 1, 0, 0 };
 struct MN913A_dna_result_type mn913a_dna_result_data = { 0 };
 struct MN913A_protein_result_type mn913a_protein_result_data = { 0 };
 void main ( void )
@@ -207,7 +208,7 @@ void main ( void )
 		SysTimerDelay( 10 );
 		Set_AD5259_Potential ( AD5259_Word_Addr_EEPROM, mn913a_preference.Xenon_Voltage_Level );
 		SysTimerDelay( 10 );
-		recv_cmd = 0;
+		//recv_cmd = 0;
 
 		if ( !Get_AD5259_Potential ( AD5259_Word_Addr_RDAC, &mn913a_preference.Xenon_Voltage_Level ) )
 			printf ( "AD5259 read RDAC: %d\n", mn913a_preference.Xenon_Voltage_Level );
@@ -216,12 +217,17 @@ void main ( void )
 
 		if ( mn913a_preference.Illumination_State == Illumination_LED_ON_State ) {
 			Illumination_LED_ON()
-			mn913a_preference.Illumination_State = Illumination_LED_ON_State;
+			//mn913a_preference.Illumination_State = Illumination_LED_ON_State;
 		}
 		else {
 			Illumination_LED_OFF()
-			mn913a_preference.Illumination_State = Illumination_LED_OFF_State;
+			//mn913a_preference.Illumination_State = Illumination_LED_OFF_State;
 		}
+		
+		if ( mn913a_preference.start_calibration == 1 ) {
+			Construct_IV_table ();
+    }
+		recv_cmd = 0;
 	}
 	else
 		if ( recv_cmd == HID_CMD_MN913A_MEASURE ) {
@@ -230,6 +236,7 @@ void main ( void )
 			//SysTimerDelay ( 10 );
 			Xenon_PWR_ON ( );
 			Illumination_LED_OFF ( );
+			Measure_Count = 102;
 			MaestroNano_Measure ( );
 			if ( mn913a_preference.Illumination_State == Illumination_LED_ON_State )
 				Illumination_LED_ON ( )
@@ -369,3 +376,95 @@ void print_protein_result () {
 	}
 }
 #endif
+
+//xenon_voltage = 3.17 + ( 4.7 - 3.17 ) * ( Cur_Voltage_Level - 162 ) / ( 242 - 162 );
+void Construct_IV_table (  ) {
+	//int voltage_index_lower_bound = 0, voltage_index_upper_bound = 0;
+	voltage_index_upper_bound = Search_Target_Intensity ( Target_Generic_A260_Intensity );
+	voltage_index_lower_bound = Search_Target_Intensity ( Target_Lowest_A260_Intensity );
+	mn913a_status.max_voltage_level = voltage_index_upper_bound;
+	mn913a_status.min_voltage_level = voltage_index_lower_bound;
+}
+
+double Set_Voltage_Get_New_Intensity ( int voltag_level ) {
+	  double intensity = 0.0;
+	  int i = 0;
+	
+		Set_AD5259_Potential ( AD5259_Word_Addr_RDAC, voltag_level );
+		SysTimerDelay( 10 );
+		Set_AD5259_Potential ( AD5259_Word_Addr_EEPROM, voltag_level );
+		SysTimerDelay( 10 );
+
+		if ( !Get_AD5259_Potential ( AD5259_Word_Addr_RDAC, &voltag_level ) )
+			printf ( "AD5259 read RDAC: %d\n", voltag_level );
+		if ( !Get_AD5259_Potential ( AD5259_Word_Addr_EEPROM, &voltag_level ) )
+			printf ( "AD5259 read EEPROM: %d\n", voltag_level );
+
+		Measure_Count = 12;
+		Illumination_LED_OFF ( );
+		Xenon_PWR_ON ( );	
+		MaestroNano_Measure ( );
+		for ( i = 2; i < 12; i++ ) {
+			intensity += adc_data1[1][i] - adc_data1[0][i];
+		  //mean[count2][1] += adc_data1[0][k];
+      //mean1[count2][1] += adc_data1[1][k];
+		}
+		intensity = intensity / 10;
+		printf ( "current intensity: %lf\n", intensity );
+		Xenon_PWR_OFF ( );
+		
+		return intensity;
+}
+
+int Search_Target_Intensity ( int target_intensity ) {
+  //double xenon_voltage1 = 3.17, xenon_voltage2 = 4.7;
+	//double Voltage_Level1 = 162 + ( ( xenon_voltage1 - 3.17 ) * ( 242 -162 ) ) / ( 4.7 - 3.17 );
+	//double Voltage_Level2 = 162 + ( ( xenon_voltage2 - 3.17 ) * ( 242 -162 ) ) / ( 4.7 - 3.17 );
+	  int cur_intensity = 0, Voltage_Level1 = 162, Voltage_Level2 = 242, best_voltage_level = 0;
+	  double intensity1 = 0.0, intensity2 = 0.0, new_target, outofbound = -1;
+	
+	  intensity1 = Set_Voltage_Get_New_Intensity ( Voltage_Level1 );
+	  intensity2 = Set_Voltage_Get_New_Intensity ( Voltage_Level2 );
+		mn913a_status.max_voltage_intensity = intensity1;
+	  mn913a_status.min_voltage_intensity = intensity2;
+				
+		if ( intensity2 < target_intensity ) {
+			printf ( "outof max bound\n" );
+			outofbound = 0;
+			best_voltage_level = Voltage_Level2;
+    }
+		else
+		   if ( intensity1 > target_intensity ) {
+				 printf ( "outof min bound\n" );
+				 outofbound = 1;
+				 best_voltage_level = Voltage_Level1;
+       }
+			 else {
+				 	while ( Voltage_Level1 < Voltage_Level2 ) {
+						new_target = Set_Voltage_Get_New_Intensity ( ( Voltage_Level1 + Voltage_Level2 ) / 2 );
+						
+						if ( new_target < target_intensity ) {
+							Voltage_Level1 = ( Voltage_Level1 + Voltage_Level2 ) / 2;
+            }
+						else {
+							 Voltage_Level2 = ( Voltage_Level1 + Voltage_Level2 ) / 2;
+            }
+						
+						if ( ( Voltage_Level2 - Voltage_Level1 ) == 1 )
+							break;
+          }
+					
+					best_voltage_level = Voltage_Level2;
+       }
+    if ( outofbound == -1 ) {
+			printf ( "find the best voltage level ( %d, %d )\n", Voltage_Level1, Voltage_Level2 );
+		}
+		else
+			 if ( outofbound == 1 )
+		if ( mn913a_preference.Illumination_State == Illumination_LED_ON_State )
+			Illumination_LED_ON ( )
+		else
+			 Illumination_LED_OFF ( )
+		
+		//GetIntensity
+}
