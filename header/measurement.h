@@ -79,5 +79,5 @@ extern int adc_temp[4], zero_count, cur_phase;
 extern double Pass1_A260_Conc, Start_Dvalid_Xenon_PWM_CNR1, Stop_Dvalid_Xenon_PWM_CNR1, Start_Dvalid_Xenon_PWM_CNR2, Stop_Dvalid_Xenon_PWM_CNR2;
 
 #define Max_Evaluate_Iteration 20
-extern Measure_Count;
+extern volatile int Measure_Count;
 #endif  //_Measurement_h

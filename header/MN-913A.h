@@ -14,7 +14,7 @@
 #include "measurement.h"
 
 #define USE_USB 1
-#define MaestroNano_Fit_Mode 1
+//#define MaestroNano_Fit_Mode 1
 
 #ifdef MaestroNano_Fit_Mode  //fitting process
 
@@ -54,6 +54,7 @@ struct MN913A_setting_type {
 	int Xenon_Voltage_Level;
 	int Illumination_State;
 	int start_calibration;
+	int Auto_Measure;
 };
 
 extern uint8_t recv_cmd;
@@ -81,13 +82,14 @@ extern  struct MN913A_setting_type mn913a_preference;
 struct MN913A_status_type {
 	BOOL remain_in_measure;
 	int max_voltage_level, min_voltage_level;
-	int max_voltage_intensity, min_voltage_intensity
+	int max_voltage_intensity, min_voltage_intensity;
+	int has_calibration;
 };
 extern  struct MN913A_status_type mn913a_status;
 
 /* 20160325 added by michael */
-#define Illumination_LED_ON_State 0
-#define Illumination_LED_OFF_State 1
+#define Illumination_LED_ON_State 1
+#define Illumination_LED_OFF_State 0
 struct MN913A_dna_data_type {
 	int index;
 	double conc, A260, A260_A280, A260_A230;
@@ -119,4 +121,7 @@ extern struct MN913A_protein_result_type mn913a_protein_result_data;
 void Construct_IV_table ();
 int Search_Target_Intensity ( int target_intensity );
 double Set_Voltage_Get_New_Intensity ( int voltag_level );
+
+void print_dna_result ();
+void print_protein_result ();
 #endif

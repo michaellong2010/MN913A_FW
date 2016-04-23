@@ -6,7 +6,7 @@ int adc_data[Measure_phases][Measure_times], adc_data1[Measure_phases][Measure_t
 int cur_phase = 1, count2 = 0;
 int most_count, range_start_index, range_end_index;
 int zero_count = 0, adc_temp[4];
-int Measure_Count = Measure_times;
+volatile int Measure_Count = Measure_times;
 
 void MaestroNano_Capture(int phase) {
 /* pahse 0: blank_init_E or sample_init_E*/

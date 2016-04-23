@@ -148,8 +148,21 @@ void GPABCallback(uint32_t u32GpaStatus, uint32_t u32GpbStatus)
 	adc_data_ready++;
   }
 	else
-		if ( (u32GpaStatus & 0x4000) ) {  //GPA.14 interrupt
+		if ( (u32GpaStatus & 0x4000) && mn913a_preference.Auto_Measure == 1 ) {  //GPA.14 interrupt
 			printf ( "Auto measure detected!\n" );
+			/*DrvTIMER_ResetTicks(TMR2);
+			while ( DrvTIMER_GetTicks(TMR2) <= 2 ) {
+			}
+			Xenon_PWR_ON ( );
+			Illumination_LED_OFF ( );
+			Measure_Count = 102;
+			MaestroNano_Measure ( );
+			if ( mn913a_preference.Illumination_State == Illumination_LED_ON_State )
+				Illumination_LED_ON ( )
+			else
+				Illumination_LED_OFF ( )
+			Xenon_PWR_OFF ( );*/
+			recv_cmd = HID_CMD_MN913A_MEASURE;
 		}
 }
 
@@ -163,8 +176,8 @@ void SysTimerDelay(uint32_t us)
   while ((SysTick->CTRL &(1 << 16)) == 0);
 }
 
-struct MN913A_setting_type mn913a_preference = { 0, Illumination_LED_ON_State, 0 };
-struct MN913A_status_type mn913a_status = { 1, 0, 0 };
+struct MN913A_setting_type mn913a_preference = { 0, Illumination_LED_OFF_State, 0, 0 };
+struct MN913A_status_type mn913a_status = { 1, 101, 25, 38, 49, 0 };
 struct MN913A_dna_result_type mn913a_dna_result_data = { 0 };
 struct MN913A_protein_result_type mn913a_protein_result_data = { 0 };
 void main ( void )
@@ -189,10 +202,10 @@ void main ( void )
   //}
   
 	printf ( "%d\n", sizeof (double) );
-	printf ( "%d\n",  &mn913a_dna_result_data.type );
-	printf ( "%d\n",  &mn913a_dna_result_data.count );
-	printf ( "%d\n", &mn913a_dna_result_data.dna_data[ i ].index );
-	printf ( "%d\n", &mn913a_dna_result_data.dna_data[ i ].conc );
+	printf ( "%d\n",  &mn913a_protein_result_data.count );
+	printf ( "%d\n",  &mn913a_protein_result_data.protein_data );
+	printf ( "%d\n", &mn913a_protein_result_data.protein_data[i].index );
+	printf ( "%d\n", &mn913a_protein_result_data.protein_data[i].A280 );
 	//for ( i = 0; i < 10; i++ ) {
 		//printf ( "%d\n", &mn913a_dna_result_data.dna_data[ i ] );
   //}
@@ -226,6 +239,7 @@ void main ( void )
 		
 		if ( mn913a_preference.start_calibration == 1 ) {
 			Construct_IV_table ();
+			mn913a_status.has_calibration = 1;
     }
 		recv_cmd = 0;
 	}
@@ -253,11 +267,17 @@ void main ( void )
 			 else
 				  if ( recv_cmd == HID_CMD_PRINT_DNA_RESULT ) {
 						printf ( "comsume command HID_CMD_PRINT_DNA_RESULT\n" );
+#ifdef PRINTER_PORT
+						print_dna_result ( );
+#endif
 						recv_cmd = 0;
 					}
 					else
 						 if ( recv_cmd == HID_CMD_PRINT_PROTEIN_RESULT ) {
 							 printf ( "comsume command HID_CMD_PRINT_PROTEIN_RESULT\n" );
+#ifdef PRINTER_PORT
+							 print_protein_result ( );
+#endif
 							 recv_cmd = 0;
 						 }
 	//MaestroNano_Measure ( );
@@ -303,23 +323,37 @@ void printer_test() {
   sprintf(buf2, "\n\r\n\r");
   DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 	
-	buf2[0] = 0x1d; buf2[1] = 0x56; buf2[2] = 0x48; buf2[3] = 0x00;
-  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+	buf2[0] = 0x1d; buf2[1] = 0x56; buf2[2] = 0x30; buf2[3] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2)+1);
 }
 
 void print_dna_result () {
 	int i = 0;
+
+  buf2[0] = 0x1d; buf2[1] = 0x72; buf2[2] = 0x01;
+  DrvUART_Write(PRINTER_PORT, buf2, 3);
+  Delay100ms(2);
+
+  buf2[0] = 0x1d; buf2[1] = 0x72; buf2[2] = 0x03;
+  DrvUART_Write(PRINTER_PORT, buf2, 3);
+  Delay100ms(2);
+
+  buf2[0] = 0x12; buf2[1] = 0x77; buf2[2] = 0x01; buf2[3] = 0xfe; buf2[4] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, 5);
+
+  buf2[0] = 0x12; buf2[1] = 0x77; buf2[2] = 0x02; buf2[3] = 0xf9; buf2[4] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, 5);
 	
   if ( mn913a_dna_result_data.count > 0 ) {
 		switch ( mn913a_dna_result_data.type ) {
 			case 0:
-				strcpy(buf2, " ===============dsDNA===============\n\r");    
+				strcpy(buf2, "==============dsDNA=============\n\r");    
 				break;
 			case 1:
-				strcpy(buf2, " ===============ssDNA===============\n\r");
+				strcpy(buf2, "==============ssDNA=============\n\r");
 				break;
 			case 2:
-				strcpy(buf2, " ================RNA================\n\r");
+				strcpy(buf2, "===============RNA==============\n\r");
 				break;
     }
 		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
@@ -340,9 +374,9 @@ void print_dna_result () {
     
 			sprintf( buf2, "    %2.3f", mn913a_dna_result_data.dna_data[i].A260 );
 			if ( mn913a_dna_result_data.dna_data[i].A260 < 10)
-				sprintf(buf2+strlen(buf2), "      %2.3f", mn913a_dna_result_data.dna_data[i].conc );
+				sprintf(buf2+strlen(buf2), "      %2.3f\n\r", mn913a_dna_result_data.dna_data[i].conc );
 			else
-			   sprintf(buf2+strlen(buf2), "     %2.3f", mn913a_dna_result_data.dna_data[i].conc );
+			   sprintf(buf2+strlen(buf2), "     %2.3f\n\r", mn913a_dna_result_data.dna_data[i].conc );
 			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 			
 			strcpy(buf2, "   A260/A230       A260/A280\n\r");
@@ -351,12 +385,35 @@ void print_dna_result () {
 		  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 		}
 	}
+	
+	//sprintf(buf2, "\n\r\n\r");
+  //DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+	buf2[0] = 0x1b; buf2[1] = 0x4a; buf2[2] = 0x02; buf2[3] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+	
+	buf2[0] = 0x1d; buf2[1] = 0x56; buf2[2] = 0x30; buf2[3] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 }
 
 void print_protein_result () {
 	int i = 0;
+	
+	buf2[0] = 0x1d; buf2[1] = 0x72; buf2[2] = 0x01;
+  DrvUART_Write(PRINTER_PORT, buf2, 3);
+  Delay100ms(2);
+
+  buf2[0] = 0x1d; buf2[1] = 0x72; buf2[2] = 0x03;
+  DrvUART_Write(PRINTER_PORT, buf2, 3);
+  Delay100ms(2);
+
+  buf2[0] = 0x12; buf2[1] = 0x77; buf2[2] = 0x01; buf2[3] = 0xfe; buf2[4] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, 5);
+
+  buf2[0] = 0x12; buf2[1] = 0x77; buf2[2] = 0x02; buf2[3] = 0xf9; buf2[4] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, 5);
+	
 	if ( mn913a_protein_result_data.count > 0 ) {
-		strcpy(buf2, " ==============Protein==============\n\r");
+		strcpy(buf2, "=============Protein============\n\r");
 		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 		
 		sprintf(buf2, "   sample_%d:\n\r", mn913a_protein_result_data.protein_data[i].index);
@@ -374,6 +431,14 @@ void print_protein_result () {
 			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 		}
 	}
+	
+	sprintf(buf2, "\n\r\n\r");
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+	buf2[0] = 0x1b; buf2[1] = 0x4a; buf2[2] = 0x02; buf2[3] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+	
+	buf2[0] = 0x1d; buf2[1] = 0x56; buf2[2] = 0x30; buf2[3] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 }
 #endif
 

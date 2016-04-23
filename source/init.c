@@ -153,6 +153,7 @@ void Init_Interface_IO(void)
 /*20160421 added by michael*/
   DrvGPIO_Open(GPA, 14, IO_INPUT);
   DrvGPIO_EnableInt(GPA, 14, IO_FALLING, MODE_EDGE);
+	DrvGPIO_EnableDebounce(GPA, 14);
 
 
 
