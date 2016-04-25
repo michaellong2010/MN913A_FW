@@ -733,7 +733,7 @@ void HID_GetInReport(uint8_t *buf)
 				{
 					/* The data transfer is complete. Reset coordinate buffer */
 					u8Cmd = HID_CMD_NONE;
-					DBG_PRINTF("MN913A transfer status complete!\n");
+					//DBG_PRINTF("MN913A transfer status complete!\n");
 				}
 				else {
 					DrvUSB_DataIn(HID_IN_EP_NUM, &g_u8PageBuff[PAGE_SIZE - g_u32BytesInPageBuf], HID_MAX_PACKET_SIZE_INT_IN);

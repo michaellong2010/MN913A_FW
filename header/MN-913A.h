@@ -14,7 +14,7 @@
 #include "measurement.h"
 
 #define USE_USB 1
-//#define MaestroNano_Fit_Mode 1
+#define MaestroNano_Fit_Mode 1
 
 #ifdef MaestroNano_Fit_Mode  //fitting process
 
@@ -83,7 +83,7 @@ struct MN913A_status_type {
 	BOOL remain_in_measure;
 	int max_voltage_level, min_voltage_level;
 	int max_voltage_intensity, min_voltage_intensity;
-	int has_calibration;
+	int has_calibration, auto_measure;
 };
 extern  struct MN913A_status_type mn913a_status;
 
