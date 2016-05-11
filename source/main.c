@@ -4,6 +4,7 @@ int voltage_index_lower_bound = 0, voltage_index_upper_bound = 0;
 volatile uint8_t bPrinter_status;
 char buf2[100];
 void printer_test();
+void Delay100ms(int a);
 
 #ifdef PRINTER_PORT
 #define RXBUFSIZE 64
@@ -179,7 +180,7 @@ void SysTimerDelay(uint32_t us)
   while ((SysTick->CTRL &(1 << 16)) == 0);
 }
 
-struct MN913A_setting_type mn913a_preference = { 0, Illumination_LED_OFF_State, 0, 0 };
+struct MN913A_setting_type mn913a_preference = { 0, Illumination_LED_OFF_State, 0, 0, 0 };
 struct MN913A_status_type mn913a_status = { 1, 101, 25, 38, 49, 0, 0 };
 struct MN913A_dna_result_type mn913a_dna_result_data = { 0 };
 struct MN913A_protein_result_type mn913a_protein_result_data = { 0 };
@@ -203,12 +204,23 @@ void main ( void )
 	  //printer_test ();
 	//return;
   //}
+	//brightness: F1 04 60 1F 83 F4
+	//buf2[0] = 0xF1; buf2[1] = 0x04; buf2[2] = 0x60; buf2[3] = 0x00; buf2[4] = 0x83, buf2[5] = 0xF4;
+	//buf2[4] = buf2[1] + buf2[2] + buf2[3];
+  //DrvUART_Write(PRINTER_PORT, buf2, 5);
+	//while ( 1 )
+	//TFT_Send_Command ( buf2, 6, 0 );
+	//ex : F1 04 66 09 73 F4 ? Dimmer=9
+	//buf2[0] = 0xF1; buf2[1] = 0x04; buf2[2] = 0x66; buf2[3] = 0x09; buf2[4] = 0x73, buf2[5] = 0xF4;
+	//buf2[4] = buf2[1] + buf2[2] + buf2[3];
+	//TFT_Send_Command ( buf2, 6, 0 );
   
 	printf ( "%d\n", sizeof (double) );
 	printf ( "%d\n",  &mn913a_protein_result_data.count );
 	printf ( "%d\n",  &mn913a_protein_result_data.protein_data );
 	printf ( "%d\n", &mn913a_protein_result_data.protein_data[i].index );
 	printf ( "%d\n", &mn913a_protein_result_data.protein_data[i].A280 );
+	Illumination_LED_OFF ( );
 	//for ( i = 0; i < 10; i++ ) {
 		//printf ( "%d\n", &mn913a_dna_result_data.dna_data[ i ] );
   //}
@@ -244,7 +256,14 @@ void main ( void )
 			//mn913a_preference.Illumination_State = Illumination_LED_OFF_State;
 		}
 		
+		if ( mn913a_preference.Reset_MCU == 1 ) {
+			mn913a_status.has_calibration = 0;
+			//DrvSYS_UnlockKeyAddr ();
+			//DrvSYS_ResetCPU ();
+		}
+
 		if ( mn913a_preference.start_calibration == 1 ) {
+			mn913a_status.has_calibration = 0;
 			Construct_IV_table ();
 			mn913a_status.has_calibration = 1;
     }
@@ -262,7 +281,7 @@ void main ( void )
 			//SysTimerDelay ( 10 );
 			Xenon_PWR_ON ( );
 			Illumination_LED_OFF ( );
-			Measure_Count = 102;
+			Measure_Count = 52;
 			MaestroNano_Measure ( );
 			if ( mn913a_preference.Illumination_State == Illumination_LED_ON_State )
 				Illumination_LED_ON ( )
@@ -398,9 +417,9 @@ void print_dna_result () {
 		}
 	}
 	
-	//sprintf(buf2, "\n\r\n\r");
-  //DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
-	buf2[0] = 0x1b; buf2[1] = 0x4a; buf2[2] = 0x02; buf2[3] = 0x00;
+	sprintf(buf2, "\n\r\n\r\n\r");
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+	buf2[0] = 0x1b; buf2[1] = 0x4a; buf2[2] = 0x05; buf2[3] = 0x00;
   DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 	
 	buf2[0] = 0x1d; buf2[1] = 0x56; buf2[2] = 0x30; buf2[3] = 0x00;
@@ -444,9 +463,9 @@ void print_protein_result () {
 		}
 	}
 	
-	sprintf(buf2, "\n\r\n\r");
+	sprintf(buf2, "\n\r\n\r\n\r");
   DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
-	buf2[0] = 0x1b; buf2[1] = 0x4a; buf2[2] = 0x02; buf2[3] = 0x00;
+	buf2[0] = 0x1b; buf2[1] = 0x4a; buf2[2] = 0x05; buf2[3] = 0x00;
   DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 	
 	buf2[0] = 0x1d; buf2[1] = 0x56; buf2[2] = 0x30; buf2[3] = 0x00;

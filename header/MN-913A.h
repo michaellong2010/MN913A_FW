@@ -55,6 +55,7 @@ struct MN913A_setting_type {
 	int Illumination_State;
 	int start_calibration;
 	int Auto_Measure;
+	int Reset_MCU;
 };
 
 extern uint8_t recv_cmd;
@@ -124,4 +125,10 @@ double Set_Voltage_Get_New_Intensity ( int voltag_level );
 
 void print_dna_result ();
 void print_protein_result ();
+
+#define TFT_Send_Command(TFT_Send_Command, len, delay) \
+   {  \
+     Delay100ms(1); \
+     DrvUART_Write(TFT_COMM_PORT, (uint8_t *)TFT_Send_Command, len); \
+   }
 #endif

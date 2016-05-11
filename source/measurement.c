@@ -141,13 +141,14 @@ double MaestroNano_Measure(void) {
      mean[count2][3] += adc_data3[0][k];
      mean1[count2][3] += adc_data3[1][k];
   }
+#endif
 	A260 = ( mean1[count2][1] - mean[count2][1] ) / ( most_count );
   //most_count_arry[count2] = most_count;
   if (count2==(Max_Evaluate_Iteration-1))
     count2 = 0;
   else
      count2++;
-#endif
+//#endif
 
 //#ifdef 1
 #if  ( defined(MaestroNano_DEBUG) && defined(MaestroNano_Fit_Mode) )

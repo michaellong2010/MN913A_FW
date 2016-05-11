@@ -50,7 +50,8 @@ void MN913A_init ( void ) {
 #endif
 
   DrvGPIO_InitFunction(FUNC_UART1);
-  param.u32BaudRate = 115200;
+  //param.u32BaudRate = 115200;
+	param.u32BaudRate = 9600;
   param.u8cRxTriggerLevel = DRVUART_FIFO_1BYTES;
   DrvUART_Open(TFT_COMM_PORT, &param);
   //DrvUART_DisableInt(TFT_COMM_PORT_ID, DRVUART_RLSNT | DRVUART_THREINT | DRVUART_RDAINT);
@@ -129,7 +130,7 @@ void Init_Interface_IO(void)
   //DrvGPIO_EnableInt(GPB, 9, IO_FALLING, MODE_EDGE);
   //DrvGPIO_EnableInt(GPB, 14, IO_FALLING, MODE_EDGE);
   DrvGPIO_EnableInt(GPB, 13, IO_FALLING, MODE_EDGE);
-  DrvGPIO_EnableInt(GPC, 6, IO_RISING, MODE_EDGE);
+  DrvGPIO_EnableInt(GPC, 6, IO_FALLING, MODE_EDGE);
   DrvGPIO_SetDebounceTime(1, DBCLKSRC_10K);
   //DrvGPIO_EnableDebounce(GPB, 9);
   //DrvGPIO_EnableDebounce(GPB, 15);
@@ -150,6 +151,7 @@ void Init_Interface_IO(void)
   DrvGPIO_Open(GPB, 11, IO_OUTPUT); //Xenon PWM
   DrvGPIO_ClrBit(GPB, 11);
   DrvGPIO_Open(GPB, 9, IO_OUTPUT);
+	DrvGPIO_ClrBit( GPB, 9 );
 /*20160421 added by michael*/
   DrvGPIO_Open(GPA, 14, IO_INPUT);
   DrvGPIO_EnableInt(GPA, 14, IO_FALLING, MODE_EDGE);
