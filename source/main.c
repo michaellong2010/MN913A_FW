@@ -3,6 +3,7 @@
 int voltage_index_lower_bound = 0, voltage_index_upper_bound = 0;
 volatile uint8_t bPrinter_status;
 char buf2[100];
+int first_time_boot = 0, lcd_on_event = 0;
 void printer_test();
 void Delay100ms(int a);
 
@@ -80,6 +81,18 @@ void GPCDECallback(uint32_t u32GpcStatus, uint32_t u32GpdStatus, uint32_t u32Gpe
   if (u32GpcStatus & (1 << 6)) {  //power_key
 	  DrvGPIO_SetBit ( GPB, 11 );
   }
+	
+  if (u32GpcStatus & (1 << 15)) {
+		printf ( "pmic standby detect\n" );
+	  if ( DrvGPIO_GetBit ( GPC, 15 ) == 1 )
+		  DrvGPIO_ClrBit ( GPC, 14 );
+	  else {
+			//first_time_boot++;
+			//lcd_on_event = 1;
+			DrvGPIO_SetBit ( GPC, 14 );
+	  }
+		  //DrvGPIO_SetBit ( GPC, 14 );
+  }
 }
 
 void EINT0Callback(void)
@@ -150,7 +163,7 @@ void GPABCallback(uint32_t u32GpaStatus, uint32_t u32GpbStatus)
   }
 	else
 		if ( (u32GpaStatus & 0x4000) ) {  //GPA.14 interrupt
-			if ( mn913a_preference.Auto_Measure == 1 ) {
+			if ( mn913a_preference.Auto_Measure == 1 && recv_cmd == 0 ) {
 			printf ( "Auto measure detected!\n" );
 			/*while ( DrvTIMER_GetTicks(TMR2) <= 2 ) {
 			}
@@ -181,12 +194,25 @@ void SysTimerDelay(uint32_t us)
 }
 
 struct MN913A_setting_type mn913a_preference = { 0, Illumination_LED_OFF_State, 0, 0, 0 };
-struct MN913A_status_type mn913a_status = { 1, 101, 25, 38, 49, 0, 0 };
+struct MN913A_status_type mn913a_status = { 1, 101, 25, 38, 49, 0, 0, 0 };
 struct MN913A_dna_result_type mn913a_dna_result_data = { 0 };
 struct MN913A_protein_result_type mn913a_protein_result_data = { 0 };
+struct MN913A_datetime_type mn913a_datetime_data = { 2016, 6, 14, 13, 35, 56 };
+union MaestroDate temp_date, temp_date1;
+int mn913a_lcd_brightness = 48;
+union meta_print_type meta_print_data = { 0 };
 void main ( void )
 {
   int i = 0;
+  char buf[10];
+
+  temp_date.PackDate.Second = 25;
+  temp_date.PackDate.Minute = 27;
+  temp_date.PackDate.Hour = 7;
+  temp_date.PackDate.Day = 11;
+  temp_date.PackDate.Month = 1;
+  temp_date.PackDate.Year = 2001;
+
   MN913A_init ( );
   Init_Interface_IO ( );
   MaestroNano_Init ( );
@@ -199,6 +225,32 @@ void main ( void )
   DrvTIMER_Open(TMR2,1,PERIODIC_MODE);
   DrvTIMER_EnableInt(TMR2);
 
+  if ( DrvGPIO_ClrBit ( GPE, 5) == 0 )
+		printf ( " printer off ");
+	else
+		printf ( " printer on ");
+  /*DrvGPIO_Open(GPC, 3, IO_OUTPUT);
+	DrvGPIO_ClrBit( GPC, 3 );
+	DrvTIMER_ResetTicks(TMR2);
+	while ( DrvTIMER_GetTicks(TMR2) <= 17 ) {
+		SysTimerDelay( 10 );
+	}*/
+	//DrvGPIO_Open(GPC, 3, IO_OUTPUT);
+	//DrvGPIO_ClrBit( GPC, 3 );
+	/*SysTimerDelay( 5000 );
+	DrvGPIO_SetBit( GPC, 3 );*/
+	
+		/*DrvTIMER_ResetTicks(TMR2);
+		while ( DrvTIMER_GetTicks(TMR2) <= 5 ) {
+			SysTimerDelay( 10 );
+		}
+		DrvGPIO_SetBit ( GPC, 14 );
+		
+		DrvTIMER_ResetTicks(TMR2);
+		while ( DrvTIMER_GetTicks(TMR2) <= 13 ) {
+			SysTimerDelay( 10 );
+		}
+		DrvGPIO_SetBit ( GPC, 14 );*/
   //while ( 1 ) {
     //getchar ( );
 	  //printer_test ();
@@ -214,17 +266,75 @@ void main ( void )
 	//buf2[0] = 0xF1; buf2[1] = 0x04; buf2[2] = 0x66; buf2[3] = 0x09; buf2[4] = 0x73, buf2[5] = 0xF4;
 	//buf2[4] = buf2[1] + buf2[2] + buf2[3];
 	//TFT_Send_Command ( buf2, 6, 0 );
-  
+	
+	printf ( "%d\n", sizeof (meta_print_data) );
+	printf ( "%d\n", &meta_print_data.normalization_data.print_type_id );
+	printf ( "%d\n", &meta_print_data.normalization_data.count );
+	printf ( "%d\n", &meta_print_data.normalization_data.target_volumn );
+	printf ( "%d\n", &meta_print_data.normalization_data.target_conc );
+	printf ( "%d\n", &meta_print_data.normalization_data.normalization_data[ 0 ].index );
+	printf ( "%d\n", &meta_print_data.normalization_data.normalization_data[ 0 ].conc );
+	printf ( "%d\n", &meta_print_data.normalization_data.normalization_data[ 0 ].sample_volumn );
+	printf ( "%d\n", &meta_print_data.normalization_data.normalization_data[ 0 ].buffer_volumn );
+	printf ( "%d\n", &meta_print_data.normalization_data.normalization_data[ 1 ].index );
+	printf ( "%d\n", &meta_print_data.normalization_data.normalization_data[ 1 ].conc );
+	printf ( "%d\n", &meta_print_data.normalization_data.normalization_data[ 1 ].sample_volumn );
+	printf ( "%d\n", &meta_print_data.normalization_data.normalization_data[ 1 ].buffer_volumn );
+
+  printf ( "%d\n", sizeof (meta_print_data) );
+	printf ( "%d\n", &meta_print_data.cali_print_data.print_type_id );
+	printf ( "%d\n", &meta_print_data.cali_print_data.datetime );
+	printf ( "%d\n", &meta_print_data.cali_print_data.datetime.year );
+	printf ( "%d\n", &meta_print_data.cali_print_data.datetime.month );
+	printf ( "%d\n", &meta_print_data.cali_print_data.datetime.dayofmonth );
+	printf ( "%d\n", &meta_print_data.cali_print_data.datetime.hour );
+	printf ( "%d\n", &meta_print_data.cali_print_data.datetime.minute );
+	printf ( "%d\n", &meta_print_data.cali_print_data.datetime.second );
+	printf ( "%d\n", &meta_print_data.cali_print_data.before );
+	printf ( "%d\n", &meta_print_data.cali_print_data.after );
+	printf ( "%d\n", &meta_print_data.cali_print_data.pass_or_fail );
+	
 	printf ( "%d\n", sizeof (double) );
 	printf ( "%d\n",  &mn913a_protein_result_data.count );
 	printf ( "%d\n",  &mn913a_protein_result_data.protein_data );
+	printf ( "%d\n",  &mn913a_protein_result_data.datetime );
 	printf ( "%d\n", &mn913a_protein_result_data.protein_data[i].index );
 	printf ( "%d\n", &mn913a_protein_result_data.protein_data[i].A280 );
+	printf ( "%d\n", &mn913a_protein_result_data.protein_data[1].index );
+	printf ( "%d\n", &mn913a_protein_result_data.protein_data[1].A280 );
+	printf ( "%d\n", &mn913a_protein_result_data.protein_data[2].index );
+	printf ( "%d\n", &mn913a_protein_result_data.protein_data[2].A280 );
+	
+  printf ( "%d\n", sizeof (double) );
+  printf ( "%d\n",  &mn913a_dna_result_data.type );
+	printf ( "%d\n",  &mn913a_dna_result_data.count );
+	printf ( "%d\n",  &mn913a_dna_result_data.datetime );
+	printf ( "%d\n",  &mn913a_dna_result_data.dna_data );
+	printf ( "%d\n",  &mn913a_dna_result_data.dna_data[0].index );
+	printf ( "%d\n",  &mn913a_dna_result_data.dna_data[0].conc );
+	printf ( "%d\n",  &mn913a_dna_result_data.dna_data[1].index );
+	printf ( "%d\n",  &mn913a_dna_result_data.dna_data[1].conc );
+	printf ( "%d\n",  &mn913a_dna_result_data.dna_data[2].index );
+	printf ( "%d\n",  &mn913a_dna_result_data.dna_data[2].conc );
+	
 	Illumination_LED_OFF ( );
+	//for ( i = 0; i < 6; i++ )
+	   //Set_Maestro_RTC ( &temp_date, i );
+	memset ( &temp_date1, 0, sizeof ( union MaestroDate ) );
+	Get_Maestro_RTC ( &temp_date1, i);
+	mn913a_datetime_data.year = temp_date1.PackDate.Year;
+	mn913a_datetime_data.month = temp_date1.PackDate.Month;
+	mn913a_datetime_data.dayofmonth = temp_date1.PackDate.Day;
+	mn913a_datetime_data.hour = temp_date1.PackDate.Hour;
+	mn913a_datetime_data.minute = temp_date1.PackDate.Minute;
+	mn913a_datetime_data.second = temp_date1.PackDate.Second;
+	printf("Y/M/D H:M:S=%d/%d/%d %d:%d:%d", temp_date1.PackDate.Year, temp_date1.PackDate.Month, temp_date1.PackDate.Day, temp_date1.PackDate.Hour, temp_date1.PackDate.Minute, temp_date1.PackDate.Second );
 	//for ( i = 0; i < 10; i++ ) {
 		//printf ( "%d\n", &mn913a_dna_result_data.dna_data[ i ] );
   //}
   /*20160111 added by michael*/
+	recv_cmd = HID_CMD_MN913A_SETTING;
+	mn913a_preference.Xenon_Voltage_Level = 162;
   while ( 1 ) {
     //getchar ();
 		//MaestroNano_Measure ( );
@@ -235,11 +345,13 @@ void main ( void )
 #if 1
 	if ( recv_cmd == HID_CMD_MN913A_SETTING ) {
 	  printf ( "AD5259 write RDAC/EEPROM: %d\n", mn913a_preference.Xenon_Voltage_Level );
+		if ( HID_CMD_MN913A_SETTING == recv_cmd )
 		recv_cmd = 0;
 		Set_AD5259_Potential ( AD5259_Word_Addr_RDAC, mn913a_preference.Xenon_Voltage_Level );
 		SysTimerDelay( 10 );
 		Set_AD5259_Potential ( AD5259_Word_Addr_EEPROM, mn913a_preference.Xenon_Voltage_Level );
 		SysTimerDelay( 10 );
+		if ( HID_CMD_MN913A_SETTING == recv_cmd )
 		recv_cmd = 0;
 
 		if ( !Get_AD5259_Potential ( AD5259_Word_Addr_RDAC, &mn913a_preference.Xenon_Voltage_Level ) )
@@ -262,15 +374,19 @@ void main ( void )
 			//DrvSYS_ResetCPU ();
 		}
 
+    if ( mn913a_preference.Auto_Measure == 0 ) {
+			mn913a_status.auto_measure = 0;
+    }
 		if ( mn913a_preference.start_calibration == 1 ) {
 			mn913a_status.has_calibration = 0;
 			Construct_IV_table ();
 			mn913a_status.has_calibration = 1;
-    }
-		if ( mn913a_preference.Auto_Measure == 0 ) {
-			mn913a_status.auto_measure = 0;
+			recv_cmd = HID_CMD_MN913A_MEASURE;
+			mn913a_status.remain_in_measure = 1;
+			continue;
     }
 		//mn913a_status.auto_measure = mn913a_preference.Auto_Measure;
+		if ( HID_CMD_MN913A_SETTING == recv_cmd )
 		recv_cmd = 0;
 	}
 	else
@@ -282,6 +398,7 @@ void main ( void )
 			Xenon_PWR_ON ( );
 			Illumination_LED_OFF ( );
 			Measure_Count = 52;
+			mn913a_status.invalid_measure = 0;
 			MaestroNano_Measure ( );
 			if ( mn913a_preference.Illumination_State == Illumination_LED_ON_State )
 				Illumination_LED_ON ( )
@@ -299,7 +416,9 @@ void main ( void )
 				  if ( recv_cmd == HID_CMD_PRINT_DNA_RESULT ) {
 						printf ( "comsume command HID_CMD_PRINT_DNA_RESULT\n" );
 #ifdef PRINTER_PORT
+						//DrvGPIO_ClrBit(GPE, 5);
 						print_dna_result ( );
+						//DrvGPIO_SetBit(GPE, 5);
 #endif
 						recv_cmd = 0;
 					}
@@ -307,13 +426,115 @@ void main ( void )
 						 if ( recv_cmd == HID_CMD_PRINT_PROTEIN_RESULT ) {
 							 printf ( "comsume command HID_CMD_PRINT_PROTEIN_RESULT\n" );
 #ifdef PRINTER_PORT
+							 //DrvGPIO_ClrBit(GPE, 5);
 							 print_protein_result ( );
+							 //DrvGPIO_SetBit(GPE, 5);
 #endif
 							 recv_cmd = 0;
 						 }
+						 else
+							 if ( recv_cmd == HID_CMD_SET_TIME ) {
+								 temp_date.PackDate.Year = mn913a_datetime_data.year;
+								 temp_date.PackDate.Month = mn913a_datetime_data.month;
+								 temp_date.PackDate.Day = mn913a_datetime_data.dayofmonth;
+								 temp_date.PackDate.Hour = mn913a_datetime_data.hour;
+								 temp_date.PackDate.Minute = mn913a_datetime_data.minute;
+								 temp_date.PackDate.Second = mn913a_datetime_data.second;
+								 for ( i = 0; i < 6; i++ )
+									 Set_Maestro_RTC ( &temp_date, i );
+								 recv_cmd = 0;
+							 }
+							 else
+								 if ( recv_cmd == HID_CMD_SET_LCD_BRIGHTNESS ) {
+									 //brightness: F1 04 60 1F 83 F4
+									 /*buf2[0] = 0xF1; buf2[1] = 0x04; buf2[2] = 0x60; buf2[3] = 0x00; buf2[4] = 0x83, buf2[5] = 0xF4;
+									 buf2[3] = (char) mn913a_lcd_brightness;
+									 buf2[4] = buf2[1] + buf2[2] + buf2[3];*/
+									 //ex : F1 06 12 1F 1F 03 59 F4 ? Brightness=31, Contrast=31, Sharpness=3
+									 buf2[0] = 0xF1; buf2[1] = 0x06; buf2[2] = 0x12; buf2[3] = 0x1F; buf2[4] = 0x1F, buf2[5] = 0x03; buf2[6] = 0x59; buf2[7] = 0xF4;
+									 buf2[3] = (char) mn913a_lcd_brightness;
+									 buf2[6] = buf2[1] + buf2[2] + buf2[3] + buf2[4] + buf2[5];
+									 TFT_Send_Command ( buf2, 8, 0 );
+									 recv_cmd = 0;
+								 }
+								 else
+									 if ( recv_cmd == HID_CMD_PRINT_META_DATA ) {
+										 if ( meta_print_data.type_id == 1 ) { //print calibration data
+											 printf ( "meta type: %d\n", meta_print_data.cali_print_data.print_type_id );
+											 printf ( "year: %d\n", meta_print_data.cali_print_data.datetime.year );
+											 printf ( "month: %d\n", meta_print_data.cali_print_data.datetime.month );
+											 printf ( "monthofday: %d\n", meta_print_data.cali_print_data.datetime.dayofmonth );
+											 printf ( "hour: %d\n", meta_print_data.cali_print_data.datetime.hour );
+											 printf ( "minute: %d\n", meta_print_data.cali_print_data.datetime.minute );
+											 printf ( "second: %d\n", meta_print_data.cali_print_data.datetime.second );
+											 printf ( "before: %4.2f\n", meta_print_data.cali_print_data.before );
+											 printf ( "after: %4.2f\n", meta_print_data.cali_print_data.after );
+											 printf ( "pass_or_fail: %d\n", meta_print_data.cali_print_data.pass_or_fail );
+#ifdef PRINTER_PORT
+											 print_meta_data ( &meta_print_data );
+#endif
+										 }
+										 else
+											 if ( meta_print_data.type_id == 2 ) { //print normalization data
+												 printf ( "meta type: %d\n", meta_print_data.normalization_data.print_type_id );
+												 printf ( "normalization data count: %d\n", meta_print_data.normalization_data.count );
+												 printf ( "target volumn: %4.2lf\n", meta_print_data.normalization_data.target_volumn );
+												 printf ( "target conc: %4.2lf\n", meta_print_data.normalization_data.target_conc );
+
+												 for ( i = 0; i < meta_print_data.normalization_data.count; i++ ) {
+													 printf ( "index: %d\n", meta_print_data.normalization_data.normalization_data[i].index );
+													 printf ( "conc.: %4.2lf\n", meta_print_data.normalization_data.normalization_data[i].conc );
+													 printf ( "sample_volumn: %4.2lf\n", meta_print_data.normalization_data.normalization_data[i].sample_volumn );
+													 printf ( "buffer_volumn: %4.2lf\n", meta_print_data.normalization_data.normalization_data[i].buffer_volumn );
+												 }
+#ifdef PRINTER_PORT
+												 print_meta_data ( &meta_print_data );
+#endif
+											 }
+										 recv_cmd = 0;
+									 }
+									 else
+										 if ( recv_cmd == HID_CMD_PRINTER_POWER_ON ) {
+											 DrvGPIO_SetBit(GPE, 5);
+											 SysTimerDelay ( 10 );
+											   //if ( DrvGPIO_ClrBit ( GPE, 5) == 0 )
+		//printf ( " printer off ");
+	//else
+		printf ( " printer on ");
+											 recv_cmd = 0;
+										 }
+										 else
+											 if ( recv_cmd == HID_CMD_PRINTER_POWER_OFF ) {
+												 DrvGPIO_ClrBit(GPE, 5);
+												 SysTimerDelay ( 10 );
+												   //if ( DrvGPIO_ClrBit ( GPE, 5) == 0 )
+		printf ( " printer off ");
+	//else
+		//printf ( " printer on ");
+												 recv_cmd = 0;
+											 }
+
 	//MaestroNano_Measure ( );
     SysTimerDelay ( 10 );
 #endif
+	/*if ( first_time_boot == 1 && lcd_on_event == 1) {
+		DrvTIMER_ResetTicks(TMR2);
+		while ( DrvTIMER_GetTicks(TMR2) <= 15 ) {
+			SysTimerDelay( 10 );
+		}
+		DrvGPIO_SetBit ( GPC, 14 );
+		lcd_on_event = 0;
+	}
+	else
+		if ( first_time_boot > 1 && lcd_on_event == 1) {
+			DrvTIMER_ResetTicks(TMR2);
+			while ( DrvTIMER_GetTicks(TMR2) <= 5 ) {
+				SysTimerDelay( 10 );
+			}
+
+			DrvGPIO_SetBit ( GPC, 14 );
+			lcd_on_event = 0;
+		}*/
   }
 }
 
@@ -358,6 +579,106 @@ void printer_test() {
   DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2)+1);
 }
 
+void print_meta_data ( union meta_print_type *pmeta_data ) {
+  int i = 0;
+	
+  buf2[0] = 0x1d; buf2[1] = 0x72; buf2[2] = 0x01;
+  DrvUART_Write(PRINTER_PORT, buf2, 3);
+  Delay100ms(2);
+
+  buf2[0] = 0x1d; buf2[1] = 0x72; buf2[2] = 0x03;
+  DrvUART_Write(PRINTER_PORT, buf2, 3);
+  Delay100ms(2);
+
+  buf2[0] = 0x12; buf2[1] = 0x77; buf2[2] = 0x01; buf2[3] = 0xfe; buf2[4] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, 5);
+
+  buf2[0] = 0x12; buf2[1] = 0x77; buf2[2] = 0x02; buf2[3] = 0xf9; buf2[4] = 0x00;
+  DrvUART_Write(PRINTER_PORT, buf2, 5);
+
+  											 /*printf ( "meta type: %d\n", meta_print_data.cali_print_data.print_type_id );
+											 printf ( "year: %d\n", meta_print_data.cali_print_data.datetime.year );
+											 printf ( "month: %d\n", meta_print_data.cali_print_data.datetime.month );
+											 printf ( "monthofday: %d\n", meta_print_data.cali_print_data.datetime.dayofmonth );
+											 printf ( "hour: %d\n", meta_print_data.cali_print_data.datetime.hour );
+											 printf ( "minute: %d\n", meta_print_data.cali_print_data.datetime.minute );
+											 printf ( "second: %d\n", meta_print_data.cali_print_data.datetime.second );
+											 printf ( "before: %4.2f\n", meta_print_data.cali_print_data.before );
+											 printf ( "after: %4.2f\n", meta_print_data.cali_print_data.after );
+											 printf ( "pass_or_fail: %d\n", meta_print_data.cali_print_data.pass_or_fail );
+											 print_meta_data ( &meta_print_data );*/
+  switch ( meta_print_data.type_id ) {
+    case 1:
+		strcpy(buf2, "=======Calibration Result=======\n\r");
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, " Date %04d/%02d/%02d\n\r", meta_print_data.cali_print_data.datetime.year, meta_print_data.cali_print_data.datetime.month, meta_print_data.cali_print_data.datetime.dayofmonth );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, " Time %02d:%02d:%02d\n\r", meta_print_data.cali_print_data.datetime.hour, meta_print_data.cali_print_data.datetime.minute, meta_print_data.cali_print_data.datetime.second );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, "================================\n\r");
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		
+		sprintf(buf2, "before calibration: %4.2f\n\r", meta_print_data.cali_print_data.before );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, "after calibration: %4.2f\n\r", meta_print_data.cali_print_data.after );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+
+		if ( meta_print_data.cali_print_data.pass_or_fail == 1 )
+			sprintf(buf2, "calibration result: pass\n\r");
+		else
+			sprintf(buf2, "calibration result: fail\n\r");
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		break;
+/*
+												 printf ( "meta type: %d\n", meta_print_data.normalization_data.print_type_id );
+												 printf ( "normalization data count: %d\n", meta_print_data.normalization_data.count );
+												 printf ( "target volumn: %4.2lf\n", meta_print_data.normalization_data.target_volumn );
+												 printf ( "target conc: %4.2lf\n", meta_print_data.normalization_data.target_conc );
+
+												 for ( i = 0; i < meta_print_data.normalization_data.count; i++ ) {
+													 printf ( "index: %d\n", meta_print_data.normalization_data.normalization_data.index );
+													 printf ( "conc.: %4.2lf\n", meta_print_data.normalization_data.normalization_data.conc );
+													 printf ( "sample_volumn: %4.2lf\n", meta_print_data.normalization_data.normalization_data.sample_volumn );
+													 printf ( "buffer_volumn: %4.2lf\n", meta_print_data.normalization_data.normalization_data.buffer_volumn );
+												 }
+*/
+	case 2:
+		strcpy(buf2, "======Normalization Result======\n\r");
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, "sample count: %d\n\r", meta_print_data.normalization_data.count );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, "target volumn: %4.2lf\n\r", meta_print_data.normalization_data.target_volumn );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, "target conc.: %4.2lf\n\r", meta_print_data.normalization_data.target_conc );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, "================================\n\r");
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+
+		for ( i = 0; i < meta_print_data.normalization_data.count; i++ ) {
+			sprintf( buf2, "index: %d\n\r", meta_print_data.normalization_data.normalization_data[i].index );
+			DrvUART_Write( PRINTER_PORT, buf2, strlen( buf2 ) );
+
+			sprintf( buf2, "Conc.: %4.2lf\n\r", meta_print_data.normalization_data.normalization_data[i].conc );
+			DrvUART_Write( PRINTER_PORT, buf2, strlen( buf2 ) );
+
+			sprintf( buf2, "sample_volumn: %4.2lf\n\r", meta_print_data.normalization_data.normalization_data[i].sample_volumn );
+			DrvUART_Write( PRINTER_PORT, buf2, strlen( buf2 ) );
+
+			sprintf( buf2, "buffer_volumn: %4.2lf\n\r", meta_print_data.normalization_data.normalization_data[i].buffer_volumn );
+			DrvUART_Write( PRINTER_PORT, buf2, strlen( buf2 ) );
+		}
+		break;
+  }
+
+  sprintf(buf2, "\n\r\n\r\n\r");
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+  buf2[0] = 0x1b; buf2[1] = 0x4a; buf2[2] = 0x05; buf2[3] = 0x00;  //print & feed forward
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+
+  buf2[0] = 0x1d; buf2[1] = 0x56; buf2[2] = 0x30; buf2[3] = 0x00;  //paper cut
+  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+}
+
 void print_dna_result () {
 	int i = 0;
 
@@ -378,7 +699,7 @@ void print_dna_result () {
   if ( mn913a_dna_result_data.count > 0 ) {
 		switch ( mn913a_dna_result_data.type ) {
 			case 0:
-				strcpy(buf2, "==============dsDNA=============\n\r");    
+				strcpy(buf2, "==============dsDNA=============\n\r");
 				break;
 			case 1:
 				strcpy(buf2, "==============ssDNA=============\n\r");
@@ -392,28 +713,45 @@ void print_dna_result () {
 		/*sprintf(buf2, " Date %04d/%02d/%02d\n\r", pSheet->sheet_date.PackDate.Year, pSheet->sheet_date.PackDate.Month, pSheet->sheet_date.PackDate.Day);
 		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 		sprintf(buf2, " Time %02d:%02d:%02d\n\r", pSheet->sheet_date.PackDate.Hour, pSheet->sheet_date.PackDate.Minute, pSheet->sheet_date.PackDate.Second);
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));*/
+		sprintf(buf2, " Date %04d/%02d/%02d\n\r", mn913a_dna_result_data.datetime.year, mn913a_dna_result_data.datetime.month, mn913a_dna_result_data.datetime.dayofmonth );
 		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
-		sprintf(buf2, " ==================================\n\r");
-    DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));*/
+		sprintf(buf2, " Time %02d:%02d:%02d\n\r", mn913a_dna_result_data.datetime.hour, mn913a_dna_result_data.datetime.minute, mn913a_dna_result_data.datetime.second );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, "================================\n\r");
+    DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 		
 		for ( i = 0; i < mn913a_dna_result_data.count; i++ ) {
 			sprintf(buf2, "   sample_%d:\n\r", mn913a_dna_result_data.dna_data[i].index);
 			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 			
-			strcpy(buf2, "   A260       Conc.          \n\r");
+			//strcpy(buf2, "   A260       Conc.          \n\r");
+			strcpy(buf2, "   A230       A260       A280\n\r");
 			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
     
-			sprintf( buf2, "    %2.3f", mn913a_dna_result_data.dna_data[i].A260 );
-			if ( mn913a_dna_result_data.dna_data[i].A260 < 10)
-				sprintf(buf2+strlen(buf2), "      %2.3f\n\r", mn913a_dna_result_data.dna_data[i].conc );
+			//sprintf( buf2, "    %2.3f", mn913a_dna_result_data.dna_data[i].A260 );
+			sprintf( buf2, "    %2.3f", mn913a_dna_result_data.dna_data[i].A230 );
+			/*if ( mn913a_dna_result_data.dna_data[i].A260 < 10)
+				sprintf(buf2+strlen(buf2), "      %4.2f (ng/uL)\n\r", mn913a_dna_result_data.dna_data[i].conc );
 			else
-			   sprintf(buf2+strlen(buf2), "     %2.3f\n\r", mn913a_dna_result_data.dna_data[i].conc );
+			   sprintf(buf2+strlen(buf2), "     %4.2f\n\r (ng/uL)", mn913a_dna_result_data.dna_data[i].conc );*/
+			if ( mn913a_dna_result_data.dna_data[i].A230 < 10 )
+				sprintf( buf2 + strlen(buf2), "      %2.3f", mn913a_dna_result_data.dna_data[i].A260 );
+			else
+				 sprintf( buf2 + strlen(buf2), "     %2.3f", mn913a_dna_result_data.dna_data[i].A260 );
+			if ( mn913a_dna_result_data.dna_data[i].A260 < 10 )
+				sprintf( buf2 + strlen(buf2), "      %2.3f\n\r", mn913a_dna_result_data.dna_data[i].A280 );
+			else
+				 sprintf( buf2 + strlen(buf2), "     %2.3f\n\r", mn913a_dna_result_data.dna_data[i].A280 );
 			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 			
 			strcpy(buf2, "   A260/A230       A260/A280\n\r");
 			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
       sprintf(buf2, "    %2.3f           %2.3f\n\r", mn913a_dna_result_data.dna_data[i].A260_A230, mn913a_dna_result_data.dna_data[i].A260_A280 );
 		  DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+			
+			sprintf(buf2, "   Conc. %4.2f (ng/uL)\n\r\n\r", mn913a_dna_result_data.dna_data[i].conc );
+			DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 		}
 	}
 	
@@ -446,6 +784,13 @@ void print_protein_result () {
 	if ( mn913a_protein_result_data.count > 0 ) {
 		strcpy(buf2, "=============Protein============\n\r");
 		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+
+		sprintf(buf2, " Date %04d/%02d/%02d\n\r", mn913a_protein_result_data.datetime.year, mn913a_protein_result_data.datetime.month, mn913a_protein_result_data.datetime.dayofmonth );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, " Time %02d:%02d:%02d\n\r", mn913a_protein_result_data.datetime.hour, mn913a_protein_result_data.datetime.minute, mn913a_protein_result_data.datetime.second );
+		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
+		sprintf(buf2, "================================\n\r");
+    DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
 		
 		sprintf(buf2, "   sample_%d:\n\r", mn913a_protein_result_data.protein_data[i].index);
 		DrvUART_Write(PRINTER_PORT, buf2, strlen(buf2));
@@ -480,8 +825,8 @@ void Construct_IV_table (  ) {
 	voltage_index_lower_bound = Search_Target_Intensity ( Target_Lowest_A260_Intensity );
 	mn913a_status.max_voltage_level = voltage_index_upper_bound;
 	mn913a_status.min_voltage_level = voltage_index_lower_bound;
-  mn913a_status.max_voltage_intensity = Set_Voltage_Get_New_Intensity ( mn913a_status.max_voltage_level );
 	mn913a_status.min_voltage_intensity = Set_Voltage_Get_New_Intensity ( mn913a_status.min_voltage_level );
+	mn913a_status.max_voltage_intensity = Set_Voltage_Get_New_Intensity ( mn913a_status.max_voltage_level );
 }
 
 double Set_Voltage_Get_New_Intensity ( int voltag_level ) {
@@ -500,6 +845,7 @@ double Set_Voltage_Get_New_Intensity ( int voltag_level ) {
 
 		Measure_Count = 12;
 		Xenon_PWR_ON ( );	
+		mn913a_status.invalid_measure = 0;
 		MaestroNano_Measure ( );
 		for ( i = 2; i < 12; i++ ) {
 			intensity += adc_data1[1][i] - adc_data1[0][i];

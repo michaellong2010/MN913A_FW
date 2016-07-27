@@ -125,12 +125,14 @@ void Init_Interface_IO(void)
   //DrvGPIO_Open(GPB, 14, IO_INPUT);  //down_key
   DrvGPIO_Open(GPB, 13, IO_INPUT);  //enter_key
   DrvGPIO_Open(GPC, 6, IO_INPUT);  //inform MCU--->PC0
+	DrvGPIO_Open(GPC, 15, IO_INPUT);
   DrvGPIO_Open(GPE, 5, IO_OUTPUT);  //output to printer Power control
-	DrvGPIO_SetBit(GPE, 5);
+	DrvGPIO_ClrBit(GPE, 5);
   //DrvGPIO_EnableInt(GPB, 9, IO_FALLING, MODE_EDGE);
   //DrvGPIO_EnableInt(GPB, 14, IO_FALLING, MODE_EDGE);
   DrvGPIO_EnableInt(GPB, 13, IO_FALLING, MODE_EDGE);
   DrvGPIO_EnableInt(GPC, 6, IO_FALLING, MODE_EDGE);
+	DrvGPIO_EnableInt(GPC, 15, IO_BOTH_EDGE, MODE_EDGE);
   DrvGPIO_SetDebounceTime(1, DBCLKSRC_10K);
   //DrvGPIO_EnableDebounce(GPB, 9);
   //DrvGPIO_EnableDebounce(GPB, 15);
@@ -138,6 +140,7 @@ void Init_Interface_IO(void)
   DrvGPIO_EnableDebounce(GPB, 13);
   //DrvGPIO_EnableDebounce(GPC, 0);
   DrvGPIO_EnableDebounce(GPC, 6);
+	DrvGPIO_EnableDebounce(GPC, 15);
 
   DrvGPIO_SetIntCallback(GPABCallback, GPCDECallback);
   DrvGPIO_EnableEINT0(IO_FALLING, MODE_EDGE, EINT0Callback);
@@ -146,7 +149,7 @@ void Init_Interface_IO(void)
 
 //enable for external Xenon&Conv
   DrvGPIO_Open(GPB, 10, IO_OUTPUT); //Conv
-  DrvGPIO_ClrBit(GPB, 10);
+  DrvGPIO_SetBit(GPB, 10);
   //DrvGPIO_ClrBit(GPB, 3);
   DrvGPIO_Open(GPB, 11, IO_OUTPUT); //Xenon PWM
   DrvGPIO_ClrBit(GPB, 11);
@@ -156,6 +159,13 @@ void Init_Interface_IO(void)
   DrvGPIO_Open(GPA, 14, IO_INPUT);
   DrvGPIO_EnableInt(GPA, 14, IO_FALLING, MODE_EDGE);
 	DrvGPIO_EnableDebounce(GPA, 14);
+	
+	/*DrvGPIO_Open(GPC, 3, IO_OUTPUT);
+	DrvGPIO_ClrBit( GPC, 3 );
+	SysTimerDelay( 5000 );
+	DrvGPIO_SetBit( GPC, 3 );*/
+	DrvGPIO_Open(GPC, 14, IO_OUTPUT);
+	DrvGPIO_SetBit(GPC, 14);
 
 
 

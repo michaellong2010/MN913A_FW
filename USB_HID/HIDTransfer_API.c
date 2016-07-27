@@ -11,9 +11,10 @@
 #include "HIDTransfer_API.h"
 #include "MN-913A.h"
 #include "measurement.h"
-
+#include "DrvFMC.h"
 //#define DBG_PRINTF(...)
 #define DBG_PRINTF  printf
+#define E_FMC_LDROM LDROM
 
 
 
@@ -220,7 +221,8 @@ const uint8_t gau8StringSerial[26] =
 
 static uint8_t  g_u8PageBuff[PAGE_SIZE] = {0};    /* Page buffer to upload/download through HID report */
 static uint32_t g_u32BytesInPageBuf = 0;                         /* The bytes of data in g_u8PageBuff */
-
+struct FW_Header updated_fw_header = { 1, {0} , 1, {0}};
+static uint8_t  g_u8PageBuff2[PAGE_SIZE] = {0};
 
 
 int32_t HID_CmdEraseSectors(CMD_T *pCmd)
@@ -244,6 +246,56 @@ int32_t HID_CmdEraseSectors(CMD_T *pCmd)
 	pCmd->u8Cmd = HID_CMD_NONE;
 	
 	return 0;
+}
+
+int32_t Recv_PRINT_META_DATA ( CMD_T *pCmd )
+{
+		uint32_t u32StartPage;
+    uint32_t u32Pages;
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+
+    DBG_PRINTF("MN913A print meta data - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    g_u32BytesInPageBuf = 0;
+    
+    /* The signature is used to page counter */
+    pCmd->u32Signature = 0;
+	  return 0;
+}
+
+int32_t Recv_MN913A_lcd_brightness ( CMD_T *pCmd )
+{
+	  uint32_t u32StartPage;
+    uint32_t u32Pages;
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+
+	//DBG_PRINTF("Write command - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    DBG_PRINTF("MN913A setting lcd brightness - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    g_u32BytesInPageBuf = 0;
+    
+    /* The signature is used to page counter */
+    pCmd->u32Signature = 0;
+	  return 0;
+}
+
+int32_t Recv_Android_systime ( CMD_T *pCmd )
+{
+	  uint32_t u32StartPage;
+    uint32_t u32Pages;
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+
+	//DBG_PRINTF("Write command - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    DBG_PRINTF("MN913A sync android systime to RTC - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    g_u32BytesInPageBuf = 0;
+    
+    /* The signature is used to page counter */
+    pCmd->u32Signature = 0;
+	  return 0;	
 }
 
 int32_t Recv_MN913A_DNA_RESULT ( CMD_T *pCmd )
@@ -356,6 +408,35 @@ int32_t Send_MN913A_STATUS(CMD_T *pCmd)
 	return 0;
 }
 
+int32_t Send_RTC_systime(CMD_T *pCmd)
+{
+	  uint32_t u32StartPage;
+    uint32_t u32Pages;
+    int32_t i;
+
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+
+    if(u32Pages)
+    {
+		//mn913a_status.remain_in_measure = 1;
+		//printf ("remain_in_measure: %d\n", mn913a_status.remain_in_measure );
+        memcpy ( g_u8PageBuff, ( void * ) &mn913a_datetime_data, (unsigned int)sizeof ( struct MN913A_datetime_type ) );
+        g_u32BytesInPageBuf = PAGE_SIZE;
+        
+        /* The signature word is used as page counter */
+        pCmd->u32Signature = 1;
+        
+	    /* Trigger HID IN */
+        //SysTimerDelay(50000);
+		DrvUSB_DataIn(HID_IN_EP_NUM, g_u8PageBuff, HID_MAX_PACKET_SIZE_INT_IN);
+		g_u32BytesInPageBuf-= HID_MAX_PACKET_SIZE_INT_IN;	
+    }
+		
+	return 0;
+}
+
 int32_t HID_CmdReadPages(CMD_T *pCmd)
 {
     uint32_t u32StartPage;
@@ -453,6 +534,71 @@ uint32_t CalCheckSum(uint8_t *buf, uint32_t size)
 
 }
 
+int32_t Read_Itrack_Firmware_Header(CMD_T *pCmd)
+{
+    uint32_t u32StartPage;
+    uint32_t u32Pages;
+    int32_t i;
+	uint8_t *pBuf = NULL;
+
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+	DBG_PRINTF("Retrieve i-tracker firmware header info - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+
+    if(u32Pages)
+    {
+		/*if (sizeof(updated_fw_header)%PAGE_SIZE)
+			Reading_Dataflash(updated_fw_header_base, g_u8PageBuff, PAGE_SIZE * (sizeof(updated_fw_header)/PAGE_SIZE + 1));
+		else
+			Reading_Dataflash(updated_fw_header_base, g_u8PageBuff, PAGE_SIZE * (sizeof(updated_fw_header)/PAGE_SIZE));*/
+		Reading_Dataflash(updated_fw_header_base, g_u8PageBuff, PAGE_SIZE);
+		pBuf = (uint8_t *)  &updated_fw_header;
+        //memcpy(pBuf, g_u8PageBuff, PAGE_SIZE);
+		DrvFMC_Read(updated_fw_header_base + 252, (uint32_t *) (g_u8PageBuff + 252));
+        g_u32BytesInPageBuf = PAGE_SIZE;
+        
+        /* The signature word is used as page counter */
+        pCmd->u32Signature = 1;
+        
+	    /* Trigger HID IN */
+        //SysTimerDelay(50000);
+		DrvUSB_DataIn(HID_IN_EP_NUM, g_u8PageBuff, HID_MAX_PACKET_SIZE_INT_IN);
+		g_u32BytesInPageBuf-= HID_MAX_PACKET_SIZE_INT_IN;	
+    }
+
+	return 0;
+}
+
+/*200160705   jan
+data flash-->read memory*/
+/*int Reading_Dataflash(uint32_t src_addr, uint8_t *destination_mem, uint32_t bytes) {
+	int i;
+	uint32_t u32Data;
+
+	for (i = 0; i < bytes; i += 4) {
+
+		DrvFMC_Read(src_addr + i, &u32Data);
+		*((uint32_t *)(destination_mem + i)) = u32Data;
+	}
+} */
+
+int32_t Upgrade_Itrack_Firmware(CMD_T *pCmd)
+{
+    uint32_t u32StartPage;
+    uint32_t u32Pages;
+    
+    u32StartPage = pCmd->u32Arg1;
+    u32Pages     = pCmd->u32Arg2;
+
+	//DBG_PRINTF("Write command - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    //DBG_PRINTF("Upgrading i-tracker firmware - Start page: %d    Pages Numbers: %d\n", u32StartPage, u32Pages);
+    g_u32BytesInPageBuf = 0;
+    
+    /* The signature is used to page counter */
+    pCmd->u32Signature = 0;
+    return 0;
+}
 
 int32_t ProcessCommand(uint8_t *pu8Buffer, uint32_t u32BufferLen)
 {
@@ -527,6 +673,49 @@ printf("\n");*/
 			break;
 		case HID_CMD_PRINT_PROTEIN_RESULT:
 			Recv_MN913A_PROTEIN_RESULT ( &gCmd );
+			break;
+		case HID_CMD_GET_TIME: //IN
+			Get_Maestro_RTC ( &temp_date1, i);
+			mn913a_datetime_data.year = temp_date1.PackDate.Year;
+	    mn913a_datetime_data.month = temp_date1.PackDate.Month;
+	    mn913a_datetime_data.dayofmonth = temp_date1.PackDate.Day;
+	    mn913a_datetime_data.hour = temp_date1.PackDate.Hour;
+	    mn913a_datetime_data.minute = temp_date1.PackDate.Minute;
+	    mn913a_datetime_data.second = temp_date1.PackDate.Second;
+			Send_RTC_systime ( &gCmd );
+			break;
+    case HID_CMD_SET_TIME: //OUT
+			Recv_Android_systime ( &gCmd );
+			break;
+		case HID_CMD_SET_LCD_BRIGHTNESS: //OUT
+			Recv_MN913A_lcd_brightness ( &gCmd );
+			break;
+		case HID_CMD_PRINT_META_DATA: //OUT
+			Recv_PRINT_META_DATA ( &gCmd );
+			break;
+		case HID_CMD_MN913_FW_UPGRADE:  //OUT	 //20160705   jan
+			//	DrvSYS_UnlockProtectedReg();
+			//	printf ( "************ HID_CMD_MN913_FW_UPGRADE\n");  //version name: 1.0.20160711
+			printf ( "Server HID_CMD_MN913_FW_UPGRADE\n");  
+			DrvSYS_UnlockKeyAddr();
+			DrvFMC_EnableISP(1);
+			Upgrade_Itrack_Firmware(&gCmd);
+			break;
+
+		case HID_CMD_MN913_FW_HEADER:  //IN		 //20160705   jan
+			//   printf ( "##########  HID_CMD_MN913_FW_HEADER\n");//version name: 1.0.20160711			  
+			//		DrvSYS_UnlockProtectedReg();
+			printf ( "Server HID_CMD_MN913_FW_HEADER\n");  
+			DrvSYS_UnlockKeyAddr();
+			DrvFMC_EnableISP(1);
+			Read_Itrack_Firmware_Header(&gCmd);
+
+			break;
+		case HID_CMD_PRINTER_POWER_ON:
+			recv_cmd = HID_CMD_PRINTER_POWER_ON;
+			break;
+    case HID_CMD_PRINTER_POWER_OFF:
+			recv_cmd = HID_CMD_PRINTER_POWER_OFF;
 			break;
 		default:
 			return -1;
@@ -607,6 +796,11 @@ void HID_SetOutReport(uint8_t *pu8EpBuf, uint32_t u32Size)
 
 					DBG_PRINTF("Setup preference command complete.\n");
 					recv_cmd = HID_CMD_MN913A_SETTING;
+					mn913a_status.max_voltage_level = mn913a_preference.max_voltage_level;
+					mn913a_status.min_voltage_level = mn913a_preference.min_voltage_level;
+					mn913a_status.has_calibration = mn913a_preference.has_calibration;
+					mn913a_status.max_voltage_intensity = mn913a_preference.max_voltage_intensity;
+					mn913a_status.min_voltage_intensity = mn913a_preference.min_voltage_intensity;
 				}
 				g_u32BytesInPageBuf = 0;
 			}
@@ -657,7 +851,7 @@ void HID_SetOutReport(uint8_t *pu8EpBuf, uint32_t u32Size)
 					memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, sizeof(mn913a_protein_result_data) - u32PageCnt*PAGE_SIZE);
 				}
 
-				u32PageCnt++;		
+				u32PageCnt++;
 				/* Setup preference command complete! */
 				if (u32PageCnt >= u32Pages)
 				{
@@ -673,6 +867,153 @@ void HID_SetOutReport(uint8_t *pu8EpBuf, uint32_t u32Size)
 			gCmd.u32Signature = u32PageCnt;
 					 }
 				else
+					if ((u8Cmd == HID_CMD_SET_TIME) &&  (u32PageCnt < u32Pages)) {
+						DrvUSB_memcpy(&g_u8PageBuff[g_u32BytesInPageBuf], pu8EpBuf, HID_MAX_PACKET_SIZE_INT_IN);
+						g_u32BytesInPageBuf += HID_MAX_PACKET_SIZE_INT_IN;
+						pBuf = (uint8_t *)  &mn913a_datetime_data;
+						if (g_u32BytesInPageBuf >= PAGE_SIZE) {
+							if ((sizeof(mn913a_datetime_data) - u32PageCnt*PAGE_SIZE) >= PAGE_SIZE) {
+								memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, PAGE_SIZE);
+							}
+							else {
+								memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, sizeof(mn913a_datetime_data) - u32PageCnt*PAGE_SIZE);
+							}
+
+							u32PageCnt++;
+							/* Setup preference command complete! */
+							if (u32PageCnt >= u32Pages)
+							{
+								u8Cmd = HID_CMD_NONE;	
+
+								//DBG_PRINTF("Transfer android systime command complete %d.\n", mn913a_protein_result_data.count);
+								printf("Y/M/D H:M:S=%d/%d/%d %d:%d:%d", mn913a_datetime_data.year, mn913a_datetime_data.month, mn913a_datetime_data.dayofmonth, mn913a_datetime_data.hour, mn913a_datetime_data.minute, mn913a_datetime_data.second );
+								recv_cmd = HID_CMD_SET_TIME;
+							}
+							g_u32BytesInPageBuf = 0;
+						}
+
+						/* Update command status */
+						gCmd.u8Cmd        = u8Cmd;
+						gCmd.u32Signature = u32PageCnt;
+					}
+					else
+						if ( ( u8Cmd == HID_CMD_SET_LCD_BRIGHTNESS ) &&  ( u32PageCnt < u32Pages ) ) {
+							DrvUSB_memcpy(&g_u8PageBuff[g_u32BytesInPageBuf], pu8EpBuf, HID_MAX_PACKET_SIZE_INT_IN);
+							g_u32BytesInPageBuf += HID_MAX_PACKET_SIZE_INT_IN;
+							pBuf = (uint8_t *)  &mn913a_lcd_brightness;
+							if (g_u32BytesInPageBuf >= PAGE_SIZE) {
+								if ((sizeof ( mn913a_lcd_brightness ) - u32PageCnt*PAGE_SIZE) >= PAGE_SIZE) {
+									memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, PAGE_SIZE);
+								}
+								else {
+									memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, sizeof ( mn913a_lcd_brightness ) - u32PageCnt*PAGE_SIZE);
+								}
+
+								u32PageCnt++;
+								/* Setup preference command complete! */
+								if (u32PageCnt >= u32Pages)
+								{
+									u8Cmd = HID_CMD_NONE;
+
+									DBG_PRINTF("Setup lcd_brightness: %d command complete.\n", mn913a_lcd_brightness);
+									recv_cmd = HID_CMD_SET_LCD_BRIGHTNESS;
+								}
+								g_u32BytesInPageBuf = 0;
+							}
+
+							/* Update command status */
+							gCmd.u8Cmd        = u8Cmd;
+							gCmd.u32Signature = u32PageCnt;
+						}
+												 else
+	   if ((u8Cmd == HID_CMD_MN913_FW_UPGRADE) &&  (u32PageCnt < u32Pages)) {
+		   DrvUSB_memcpy(&g_u8PageBuff[g_u32BytesInPageBuf], pu8EpBuf, HID_MAX_PACKET_SIZE_INT_IN);
+		   g_u32BytesInPageBuf += HID_MAX_PACKET_SIZE_INT_IN;
+
+		   //pBuf = (uint8_t *)  &updated_fw_header;
+
+		   if (g_u32BytesInPageBuf >= PAGE_SIZE) {
+			   memcpy(g_u8PageBuff2, g_u8PageBuff, PAGE_SIZE);
+			   if (u32PageCnt==0) {
+				   /*if ((sizeof(updated_fw_header) - u32PageCnt*PAGE_SIZE) >= PAGE_SIZE) {
+					   memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, PAGE_SIZE);
+				   }
+				   else 
+					   if ((sizeof(updated_fw_header) - u32PageCnt*PAGE_SIZE) > 0)
+						   memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, sizeof(updated_fw_header) - u32PageCnt*PAGE_SIZE);*/
+				   
+				   //DrvFMC_Erase(updated_fw_header_base);
+				   //Programming_Dataflash(g_u8PageBuff, updated_fw_header_base, sizeof(updated_fw_header));
+				   if (!u32StartPage) {
+					   //printf("erase addr: %08x\n", updated_fw_header_base);
+					   DrvFMC_Erase(updated_fw_header_base);
+					   Programming_Dataflash(g_u8PageBuff2, updated_fw_header_base, PAGE_SIZE);
+				   }
+				   else
+					   if (u32StartPage > 0) {
+						   if (u32StartPage%2) {
+							   //printf("erase addr: %08x\n", updated_fw_bin_base + (u32StartPage-1) * PAGE_SIZE);
+							   DrvFMC_Erase(updated_fw_bin_base + (u32StartPage-1) * PAGE_SIZE);
+							   Programming_Dataflash(g_u8PageBuff2, updated_fw_bin_base + (u32StartPage-1) * PAGE_SIZE, PAGE_SIZE);
+						   }
+						   else {
+							   Programming_Dataflash(g_u8PageBuff2, updated_fw_bin_base + (u32StartPage-1) * PAGE_SIZE, PAGE_SIZE);
+						   }
+					   }
+			   }
+			   else {
+			   }
+
+               //DrvFMC_Erase(updated_fw_bin_base + u32StartPage * PAGE_SIZE);
+			   //Programming_Dataflash(g_u8PageBuff, updated_fw_bin_base + u32StartPage * PAGE_SIZE, PAGE_SIZE);
+			   u32PageCnt++;		
+			   /* Upgrade firmware command complete! */
+			   if (u32PageCnt >= u32Pages)
+			   {
+				   u8Cmd = HID_CMD_NONE;	
+
+				   DrvFMC_EnableISP(1);
+				   if (!u32StartPage) {
+					   DBG_PRINTF("Upgrade firmware command complete.\n");
+				       DrvFMC_BootSelect(E_FMC_LDROM);
+					   DrvSYS_ResetCPU();
+				   }
+				   DrvSYS_LockKeyAddr();
+				  // DrvSYS_LockProtectedReg();
+			   }
+			   g_u32BytesInPageBuf = 0;
+		   }
+		   /* Update command status */
+		   gCmd.u8Cmd        = u8Cmd;
+		   gCmd.u32Signature = u32PageCnt;
+	   }
+						else
+							if ( ( u8Cmd == HID_CMD_PRINT_META_DATA ) &&  ( u32PageCnt < u32Pages ) ) {
+								DrvUSB_memcpy(&g_u8PageBuff[g_u32BytesInPageBuf], pu8EpBuf, HID_MAX_PACKET_SIZE_INT_IN);
+								g_u32BytesInPageBuf += HID_MAX_PACKET_SIZE_INT_IN;
+								pBuf = (uint8_t *)  &meta_print_data;
+								if (g_u32BytesInPageBuf >= PAGE_SIZE) {
+									if ((sizeof ( meta_print_data ) - u32PageCnt*PAGE_SIZE) >= PAGE_SIZE) {
+										memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, PAGE_SIZE);
+									}
+									else {
+										memcpy(pBuf+u32PageCnt*PAGE_SIZE, g_u8PageBuff, sizeof ( meta_print_data ) - u32PageCnt*PAGE_SIZE);
+									}
+									u32PageCnt++;
+									/* Setup preference command complete! */
+									if (u32PageCnt >= u32Pages)
+									{
+										u8Cmd = HID_CMD_NONE;
+										DBG_PRINTF("Transfer meta print data command complete %d.\n", meta_print_data.type_id );
+										recv_cmd = HID_CMD_PRINT_META_DATA;
+									}
+									g_u32BytesInPageBuf = 0;
+								}
+								/* Update command status */
+								gCmd.u8Cmd        = u8Cmd;
+								gCmd.u32Signature = u32PageCnt;
+							}
+							else
     {
         /* Check and process the command packet */
         if(ProcessCommand(pu8EpBuf, u32Size))
@@ -812,7 +1153,54 @@ void HID_GetInReport(uint8_t *buf)
 				g_u32BytesInPageBuf -= HID_MAX_PACKET_SIZE_INT_IN;
 			}
 		}
+		else
+			if ( u8Cmd == HID_CMD_GET_TIME ) {
+				if ( ( u32PageCnt >= u32TotalPages ) && ( g_u32BytesInPageBuf == 0 ) )
+				{
+					/* The data transfer is complete. Reset coordinate buffer */
+					u8Cmd = HID_CMD_NONE;
+					DBG_PRINTF("MN913A read RTC time completed!\n");
+				}
+				else {
+					/*if ( g_u32BytesInPageBuf == 0 ) {
+						g_u32BytesInPageBuf = PAGE_SIZE;
+						u32PageCnt++;
+					}*/
+					DrvUSB_DataIn(HID_IN_EP_NUM, &g_u8PageBuff[PAGE_SIZE - g_u32BytesInPageBuf], HID_MAX_PACKET_SIZE_INT_IN);
+					g_u32BytesInPageBuf -= HID_MAX_PACKET_SIZE_INT_IN;
+				}
+			}
 
+        else
+					if (u8Cmd == HID_CMD_MN913_FW_HEADER) {
+				if ((u32PageCnt >= u32TotalPages) && (g_u32BytesInPageBuf == 0)) {
+					u8Cmd = HID_CMD_NONE;
+				//	DrvFMC_DisableISP();
+				    DrvFMC_EnableISP(1);
+					DrvSYS_LockKeyAddr();
+				//	DrvSYS_LockProtectedReg();
+					DBG_PRINTF("####  Read firmware header command complete.\n");
+				}
+				else {
+					if (g_u32BytesInPageBuf == 0) {
+						pBuf = (uint8_t *)  &updated_fw_header;
+						if ((sizeof(updated_fw_header) - u32PageCnt*PAGE_SIZE) >= PAGE_SIZE) {
+							Reading_Dataflash(updated_fw_header_base + u32PageCnt * PAGE_SIZE, g_u8PageBuff, PAGE_SIZE);
+							memcpy(pBuf + u32PageCnt * PAGE_SIZE, g_u8PageBuff, PAGE_SIZE);
+						}
+						else 
+							if ((sizeof(updated_fw_header) - u32PageCnt*PAGE_SIZE) >= 0) {
+								Reading_Dataflash(updated_fw_header_base + u32PageCnt * PAGE_SIZE, g_u8PageBuff, (sizeof(updated_fw_header) - u32PageCnt * PAGE_SIZE));
+							    memcpy(pBuf + u32PageCnt * PAGE_SIZE, g_u8PageBuff, (sizeof(updated_fw_header) - u32PageCnt * PAGE_SIZE));
+							    memset(g_u8PageBuff + (sizeof(updated_fw_header) - u32PageCnt * PAGE_SIZE), 0,  PAGE_SIZE - (sizeof(updated_fw_header) - u32PageCnt * PAGE_SIZE));
+							}
+						g_u32BytesInPageBuf = PAGE_SIZE;
+						u32PageCnt++;
+					}
+					DrvUSB_DataIn(HID_IN_EP_NUM, &g_u8PageBuff[PAGE_SIZE - g_u32BytesInPageBuf], HID_MAX_PACKET_SIZE_INT_IN);
+					g_u32BytesInPageBuf -= HID_MAX_PACKET_SIZE_INT_IN;
+				}
+			}
 	
 	gCmd.u8Cmd        = u8Cmd;
 	gCmd.u32Signature = u32PageCnt; 

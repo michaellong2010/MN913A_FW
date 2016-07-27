@@ -24,6 +24,11 @@ void MaestroNano_Capture(int phase) {
   /* 20160318 modified by michael */
   DrvTIMER_ResetTicks(TMR2);
   while (adc_data_ready < (Measure_Count+6)) {
+		/*if ( DrvGPIO_GetBit ( GPA, 14 ) == 1 ) {
+			Xenon_Flash_Off ( );
+			Xenon_PWR_OFF ( );
+			mn913a_status.invalid_measure = 1;
+    }*/
     SysTimerDelay(5);
 	//if (adc_data_ready==8 && !phase)
 	  //break;

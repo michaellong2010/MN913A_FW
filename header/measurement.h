@@ -50,7 +50,8 @@
 
 /* 20160325 added by michael */
 #define Xenon_PWR_ON() DrvGPIO_SetBit ( GPB, 10 );
-#define Xenon_PWR_OFF() DrvGPIO_ClrBit ( GPB, 10 );
+#define Xenon_PWR_OFF() DrvGPIO_SetBit ( GPB, 10 );
+//#define Xenon_PWR_OFF() DrvGPIO_ClrBit ( GPB, 10 );
 #define Illumination_LED_ON() DrvGPIO_SetBit ( GPB, 9 );
 #define Illumination_LED_OFF() DrvGPIO_ClrBit ( GPB, 9 );
 #else
@@ -64,13 +65,13 @@
 #define Measure_phases 2
 #define Measure_times 102
 //#define DDC114_DEBUG
-#define MaestroNano_DEBUG 1
+//#define MaestroNano_DEBUG 1
 //#define SYS_DEBUG 1
 //#define Adjust_Intensity 1
 //#define MaestroNano_Fit_Mode 1
 #define MaestroNano_OD_Allow_Negative 1
 #define MaestroNano_Algo 1
-#define Increasing_Sample_Mode 1
+#define Increasing_Sample_Mode 1 
 
 extern volatile uint32_t adc_data_ready, redundancy_entry, cur_adc_data_ready;
 extern int adc_data[Measure_phases][Measure_times], adc_data1[Measure_phases][Measure_times], adc_data2[Measure_phases][Measure_times], adc_data3[Measure_phases][Measure_times];
