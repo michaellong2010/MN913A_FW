@@ -14,7 +14,7 @@
 #include "measurement.h"
 
 #define USE_USB 1
-//#define MaestroNano_Fit_Mode 1
+#define MaestroNano_Fit_Mode 1
 
 #ifdef MaestroNano_Fit_Mode  //fitting process
 
@@ -137,7 +137,7 @@ extern struct MN913A_protein_result_type mn913a_protein_result_data;
 #define Target_Lowest_A260_Intensity 350000
 void Construct_IV_table ();
 int Search_Target_Intensity ( int target_intensity );
-double Set_Voltage_Get_New_Intensity ( int voltag_level );
+double Set_Voltage_Get_New_Intensity ( int voltag_level, int is_calibration );
 
 void print_dna_result ();
 void print_protein_result ();

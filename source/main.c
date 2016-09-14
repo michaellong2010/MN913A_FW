@@ -6,6 +6,7 @@ char buf2[100];
 int first_time_boot = 0, lcd_on_event = 0;
 void printer_test();
 void Delay100ms(int a);
+int allow_detect_pmic = 0;
 
 #ifdef PRINTER_PORT
 #define RXBUFSIZE 64
@@ -82,7 +83,7 @@ void GPCDECallback(uint32_t u32GpcStatus, uint32_t u32GpdStatus, uint32_t u32Gpe
 	  DrvGPIO_SetBit ( GPB, 11 );
   }
 	
-  if (u32GpcStatus & (1 << 15)) {
+  if (u32GpcStatus & (1 << 15) && allow_detect_pmic==1) {
 		printf ( "pmic standby detect\n" );
 	  if ( DrvGPIO_GetBit ( GPC, 15 ) == 1 )
 		  DrvGPIO_ClrBit ( GPC, 14 );
@@ -370,6 +371,7 @@ void main ( void )
 		
 		if ( mn913a_preference.Reset_MCU == 1 ) {
 			mn913a_status.has_calibration = 0;
+			allow_detect_pmic = 1;
 			//DrvSYS_UnlockKeyAddr ();
 			//DrvSYS_ResetCPU ();
 		}
@@ -383,6 +385,7 @@ void main ( void )
 			mn913a_status.has_calibration = 1;
 			recv_cmd = HID_CMD_MN913A_MEASURE;
 			mn913a_status.remain_in_measure = 1;
+			//printf("#####  %s %d",__FUNCTION__, mn913a_status.remain_in_measure);//jan
 			continue;
     }
 		//mn913a_status.auto_measure = mn913a_preference.Auto_Measure;
@@ -406,6 +409,9 @@ void main ( void )
 				Illumination_LED_OFF ( )
 			Xenon_PWR_OFF ( );
 			mn913a_status.remain_in_measure = 0;
+			//printf("\n");//jan
+			//printf("measure finish :::: %s %d",__FUNCTION__, mn913a_status.remain_in_measure);//jan
+			//printf("\n");//jan
 			recv_cmd = 0;
 		}
 		else
@@ -825,11 +831,11 @@ void Construct_IV_table (  ) {
 	voltage_index_lower_bound = Search_Target_Intensity ( Target_Lowest_A260_Intensity );
 	mn913a_status.max_voltage_level = voltage_index_upper_bound;
 	mn913a_status.min_voltage_level = voltage_index_lower_bound;
-	mn913a_status.min_voltage_intensity = Set_Voltage_Get_New_Intensity ( mn913a_status.min_voltage_level );
-	mn913a_status.max_voltage_intensity = Set_Voltage_Get_New_Intensity ( mn913a_status.max_voltage_level );
+	mn913a_status.min_voltage_intensity = Set_Voltage_Get_New_Intensity ( mn913a_status.min_voltage_level, 0 );
+	mn913a_status.max_voltage_intensity = Set_Voltage_Get_New_Intensity ( mn913a_status.max_voltage_level, 0 );
 }
 
-double Set_Voltage_Get_New_Intensity ( int voltag_level ) {
+double Set_Voltage_Get_New_Intensity ( int voltag_level, int is_calibration ) {
 	  double intensity = 0.0;
 	  int i = 0;
 	
@@ -843,16 +849,19 @@ double Set_Voltage_Get_New_Intensity ( int voltag_level ) {
 		if ( !Get_AD5259_Potential ( AD5259_Word_Addr_EEPROM, &voltag_level ) )
 			printf ( "AD5259 read EEPROM: %d\n", voltag_level );
 
-		Measure_Count = 12;
+		if ( is_calibration == 1 )
+			Measure_Count = 12;
+		else
+			 Measure_Count = 52;
 		Xenon_PWR_ON ( );	
 		mn913a_status.invalid_measure = 0;
 		MaestroNano_Measure ( );
-		for ( i = 2; i < 12; i++ ) {
+		for ( i = 2; i < Measure_Count; i++ ) {
 			intensity += adc_data1[1][i] - adc_data1[0][i];
 		  //mean[count2][1] += adc_data1[0][k];
       //mean1[count2][1] += adc_data1[1][k];
 		}
-		intensity = intensity / 10;
+		intensity = intensity / ( Measure_Count - 2 );
 		printf ( "current intensity: %lf\n", intensity );
 		Xenon_PWR_OFF ( );
 		
@@ -866,8 +875,8 @@ int Search_Target_Intensity ( int target_intensity ) {
 	  int cur_intensity = 0, Voltage_Level1 = 162, Voltage_Level2 = 242, best_voltage_level = 0;
 	  double intensity1 = 0.0, intensity2 = 0.0, new_target, outofbound = -1;
 	
-	  intensity1 = Set_Voltage_Get_New_Intensity ( Voltage_Level1 );
-	  intensity2 = Set_Voltage_Get_New_Intensity ( Voltage_Level2 );
+	  intensity1 = Set_Voltage_Get_New_Intensity ( Voltage_Level1, 1 );
+	  intensity2 = Set_Voltage_Get_New_Intensity ( Voltage_Level2, 1 );
 		//mn913a_status.max_voltage_intensity = intensity1;
 	  //mn913a_status.min_voltage_intensity = intensity2;
 				
@@ -885,7 +894,7 @@ int Search_Target_Intensity ( int target_intensity ) {
 			 else {
 				  Illumination_LED_OFF ( );
 				 	while ( Voltage_Level1 < Voltage_Level2 ) {
-						new_target = Set_Voltage_Get_New_Intensity ( ( Voltage_Level1 + Voltage_Level2 ) / 2 );
+						new_target = Set_Voltage_Get_New_Intensity ( ( Voltage_Level1 + Voltage_Level2 ) / 2, 1 );
 						
 						if ( new_target < target_intensity ) {
 							Voltage_Level1 = ( Voltage_Level1 + Voltage_Level2 ) / 2;

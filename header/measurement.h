@@ -65,7 +65,7 @@
 #define Measure_phases 2
 #define Measure_times 102
 //#define DDC114_DEBUG
-//#define MaestroNano_DEBUG 1
+#define MaestroNano_DEBUG 1
 //#define SYS_DEBUG 1
 //#define Adjust_Intensity 1
 //#define MaestroNano_Fit_Mode 1

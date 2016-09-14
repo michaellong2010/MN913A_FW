@@ -116,6 +116,8 @@ void Init_Interface_IO(void)
   DrvGPIO_Open(GPA, 7, IO_OUTPUT);
 #endif
 
+	DrvGPIO_Open(GPC, 14, IO_OUTPUT);
+	DrvGPIO_SetBit(GPC, 14);
   //DrvGPIO_Open(GPB, 9, IO_INPUT); //up_key
   SYS->GPBMFP.TM1_SS11 = 0;
   /*20130417 added by michael
@@ -164,8 +166,8 @@ void Init_Interface_IO(void)
 	DrvGPIO_ClrBit( GPC, 3 );
 	SysTimerDelay( 5000 );
 	DrvGPIO_SetBit( GPC, 3 );*/
-	DrvGPIO_Open(GPC, 14, IO_OUTPUT);
-	DrvGPIO_SetBit(GPC, 14);
+	//DrvGPIO_Open(GPC, 14, IO_OUTPUT);
+	//DrvGPIO_SetBit(GPC, 14);
 
 
 

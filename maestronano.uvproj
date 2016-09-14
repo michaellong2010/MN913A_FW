@@ -457,6 +457,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\Src\Driver\DrvI2C.c</FilePath>
             </File>
+            <File>
+              <FileName>DrvFMC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\Src\Driver\DrvFMC.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -491,6 +496,11 @@
               <FileName>peripheral.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\source\peripheral.c</FilePath>
+            </File>
+            <File>
+              <FileName>flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\source\flash.c</FilePath>
             </File>
           </Files>
         </Group>
